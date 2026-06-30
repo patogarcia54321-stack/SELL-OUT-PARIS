@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KANO Outdoor — Paris INV26 | Sell-Out Report</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{--navy:#0b1120;--teal:#00c2a8;--orange:#f56318;--yellow:#f5c518;--red:#e03030;--green:#1bd97b;--muted:#8892a4;--border:#1e2d48;--card:#131e33;--text:#e8edf5;--text2:#b0bac9}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--navy);color:var(--text);font-family:'Inter',sans-serif;font-size:13px}
+
+.header{background:linear-gradient(135deg,#0d1525,#0b1120 60%,#0e1f35);border-bottom:1px solid var(--border);padding:26px 40px 22px;display:flex;align-items:flex-end;justify-content:space-between;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:-40px;right:-40px;width:260px;height:260px;background:radial-gradient(circle,#00c2a815,transparent 70%);pointer-events:none}
+.header-tag{font-family:'DM Mono',monospace;font-size:10px;color:var(--teal);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
+.header-title{font-family:'Syne',sans-serif;font-size:27px;font-weight:800;letter-spacing:-.5px}
+.header-title span{color:var(--teal)}
+.header-sub{font-size:12px;color:var(--muted);margin-top:2px}
+.header-meta{text-align:right;font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.8}
+.header-meta strong{color:var(--teal)}
+.new-badge{display:inline-flex;align-items:center;gap:5px;background:#0a2018;border:1px solid var(--green);border-radius:4px;padding:2px 8px;font-family:'DM Mono',monospace;font-size:10px;color:var(--green);margin-left:8px;vertical-align:middle}
+.new-badge::before{content:'';width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 1.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
+
+/* FILTER BAR */
+.filter-bar{background:#0d1828;border-bottom:1px solid var(--border);padding:11px 40px;display:flex;align-items:center;gap:7px;flex-wrap:wrap;position:sticky;top:0;z-index:100}
+.filter-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;white-space:nowrap;margin-right:4px}
+.wk-btn{font-family:'DM Mono',monospace;font-size:11px;padding:4px 10px;border-radius:5px;border:1px solid var(--border);background:#131e33;color:var(--text2);cursor:pointer;transition:all .15s;white-space:nowrap}
+.wk-btn:hover{border-color:var(--teal);color:var(--teal)}
+.wk-btn.active{background:var(--teal);border-color:var(--teal);color:#0b1120;font-weight:700}
+.wk-btn.all{background:#1e2d48;border-color:#304060;color:var(--text)}
+.wk-btn.all.active{background:#304060;border-color:#4060a0;color:#fff}
+.wk-btn.new-week{border-color:#1bd97b60;color:#1bd97b}
+.wk-btn.new-week.active{background:#1bd97b;border-color:#1bd97b;color:#0b1120}
+.filter-sep{width:1px;height:18px;background:var(--border);flex-shrink:0}
+
+.main{padding:20px 40px;max-width:1400px;margin:0 auto}
+
+/* WEEK BANNER */
+.week-banner{display:none;border-radius:8px;padding:13px 18px;margin-bottom:16px;gap:24px;align-items:center;flex-wrap:wrap;background:linear-gradient(90deg,#0a1e35,#0d2030);border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.week-banner.visible{display:flex}
+.week-banner.hot{background:linear-gradient(90deg,#1a1200,#1a1800);border-color:var(--yellow);border-left-color:var(--yellow)}
+.wb-item{display:flex;flex-direction:column;gap:2px}
+.wb-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-family:'DM Mono',monospace}
+.wb-val{font-family:'Syne',sans-serif;font-size:19px;font-weight:700}
+.teal{color:var(--teal)}.green{color:var(--green)}.orange{color:var(--orange)}.hot{color:var(--yellow)}.white{color:#fff}
+
+/* ALERT */
+.alert-banner{border-radius:8px;padding:11px 17px;margin-bottom:16px;display:flex;align-items:flex-start;gap:11px;font-size:12px;line-height:1.5}
+.alert-banner.warn{background:linear-gradient(90deg,#1a0e08,#1f1208);border:1px solid var(--orange);border-left:4px solid var(--orange);color:#e0a080}
+.alert-banner.good{background:linear-gradient(90deg,#061a10,#081f15);border:1px solid var(--green);border-left:4px solid var(--green);color:#80d0a0}
+.alert-banner.hot{background:linear-gradient(90deg,#1a1200,#1a1600);border:1px solid var(--yellow);border-left:4px solid var(--yellow);color:#d4b060}
+
+/* KPI GRID */
+.kpi-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:11px;margin-bottom:20px}
+.kpi-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;position:relative;overflow:hidden}
+.kpi-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--accent,var(--teal))}
+.kpi-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:6px}
+.kpi-value{font-family:'Syne',sans-serif;font-size:21px;font-weight:700;line-height:1}
+.kpi-sub{font-size:10px;color:var(--muted);margin-top:4px}
+.badge{display:inline-block;padding:2px 7px;border-radius:20px;font-family:'DM Mono',monospace;font-size:10px;margin-top:4px}
+.badge-warn{background:#2a1a08;color:var(--orange)}.badge-ok{background:#0a2018;color:var(--green)}.badge-hot{background:#1a1a08;color:var(--yellow)}
+
+/* CHARTS */
+.charts-row{display:grid;grid-template-columns:1.6fr 1fr;gap:14px;margin-bottom:20px}
+.chart-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px}
+.chart-title{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:11px}
+.chart-wrap{position:relative;height:190px}
+
+.section-title{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--teal);margin-bottom:11px;display:flex;align-items:center;gap:8px}
+.section-title::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* TABLES */
+.table-card{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:20px}
+.table-header{padding:12px 17px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.table-header-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--text2)}
+table{width:100%;border-collapse:collapse}
+thead tr{background:#0e1828}
+thead th{padding:8px 11px;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--muted);text-align:right;white-space:nowrap}
+thead th:first-child,thead th:nth-child(2){text-align:left}
+tbody tr{border-bottom:1px solid #1a2540;transition:background .12s}
+tbody tr:hover{background:#162035}
+tbody tr:last-child{border-bottom:none}
+td{padding:7px 11px;font-size:12px;text-align:right;color:var(--text2)}
+td:first-child{text-align:left;color:var(--text);font-family:'DM Mono',monospace;font-size:11px}
+td:nth-child(2){text-align:left;max-width:165px;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.zero-row td{opacity:.28}
+
+/* SELL-THROUGH */
+.st-wrap{display:flex;align-items:center;gap:6px;justify-content:flex-end}
+.st-bg{flex:1;max-width:60px;height:4px;background:#1e2d48;border-radius:2px;overflow:hidden}
+.st-fill{height:100%;border-radius:2px}
+.st-v{font-family:'DM Mono',monospace;font-size:11px;min-width:36px;text-align:right}
+.st-low{color:var(--red)}.st-mid{color:var(--yellow)}.st-ok{color:var(--green)}.st-hot{color:#00e8d0}
+
+/* HEATMAP */
+.heat-zero{color:#253048}
+.heat-1{color:#5585cc;background:#0d1e3a}
+.heat-2{color:#4ecdc4;background:#0a2830}
+.heat-3{color:#00c2a8;background:#062520;font-weight:600}
+.heat-4{color:#1bd97b;background:#062018;font-weight:700}
+.heat-5{color:#f5c518;background:#1a1a06;font-weight:700}
+.heat-6{color:#ff9040;background:#1a1008;font-weight:700}
+td.wk{text-align:center;font-family:'DM Mono',monospace;font-size:10px;padding:6px 3px}
+td.wk-hi{text-align:center;font-family:'DM Mono',monospace;font-size:10px;padding:6px 3px;outline:1px solid var(--teal);outline-offset:-1px}
+td.wk-new{text-align:center;font-family:'DM Mono',monospace;font-size:10px;padding:6px 3px;border-left:2px solid #1bd97b30}
+td.wk-new-hi{text-align:center;font-family:'DM Mono',monospace;font-size:10px;padding:6px 3px;border-left:2px solid #1bd97b30;outline:1px solid var(--green);outline-offset:-1px}
+
+td.sz{text-align:center;font-family:'DM Mono',monospace;font-size:11px}
+.sz-0{color:#253048}.sz-pos{color:var(--teal);font-weight:600}
+
+.bottom-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:14px;margin-bottom:20px}
+
+.inv-row{display:flex;align-items:center;padding:7px 17px;border-bottom:1px solid #1a2540;gap:10px}
+.inv-row:last-child{border-bottom:none}
+.inv-sku{font-family:'DM Mono',monospace;font-size:11px;color:var(--text);min-width:130px}
+.inv-bg{flex:1;height:4px;background:#1e2d48;border-radius:2px;overflow:hidden}
+.inv-bar{height:100%;background:linear-gradient(90deg,var(--teal),#00a898);border-radius:2px}
+.inv-v{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);min-width:44px;text-align:right}
+
+.mg{display:inline-block;padding:2px 6px;border-radius:20px;font-family:'DM Mono',monospace;font-size:10px}
+.mg.ok{background:#0a2018;color:var(--green)}.mg.warn{background:#2a1a08;color:var(--orange)}.mg.red{background:#2a0808;color:var(--red)}
+
+.footnote{font-size:10px;color:var(--muted);font-family:'DM Mono',monospace;text-align:center;padding:13px 0 7px;border-top:1px solid var(--border);line-height:1.8}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <div class="header-tag">▸ KANO · Paris Chile · Categoría Outdoor</div>
+    <div class="header-title">KANO <span>Outdoor</span> — Sell-Out INV26 <span class="new-badge">06-21 nueva</span></div>
+    <div class="header-sub">Subdepartamento OUTDOOR · 14 SKUs base · Temporada Invierno 2026</div>
+  </div>
+  <div class="header-meta">
+    <div>Período <strong>23 Mar → 27 Jun 2026</strong></div>
+    <div>14 semanas · actualizado <strong>30 Jun 2026</strong></div>
+    <div>Fuente <strong>Base_sell_out_Paris__9_</strong></div>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <span class="filter-label">Semana →</span>
+  <button class="wk-btn all active" onclick="filterWeek('ALL')">Todas</button>
+  <div class="filter-sep"></div>
+  <button class="wk-btn" onclick="filterWeek(0)">03-23</button>
+  <button class="wk-btn" onclick="filterWeek(1)">03-29</button>
+  <button class="wk-btn" onclick="filterWeek(2)">04-05</button>
+  <button class="wk-btn" onclick="filterWeek(3)">04-12</button>
+  <button class="wk-btn" onclick="filterWeek(4)">04-19</button>
+  <button class="wk-btn" onclick="filterWeek(5)">04-26</button>
+  <button class="wk-btn" onclick="filterWeek(6)">05-03</button>
+  <button class="wk-btn" onclick="filterWeek(7)">05-10</button>
+  <button class="wk-btn" onclick="filterWeek(8)">05-17</button>
+  <button class="wk-btn" onclick="filterWeek(9)">05-24</button>
+  <button class="wk-btn" onclick="filterWeek(10)">05-31</button>
+  <button class="wk-btn" onclick="filterWeek(11)">06-07</button>
+  <button class="wk-btn" onclick="filterWeek(12)">06-14 ★</button>
+  <button class="wk-btn new-week" onclick="filterWeek(13)">06-21 ●</button>
+</div>
+
+<div class="main">
+
+  <!-- WEEK BANNER -->
+  <div class="week-banner" id="weekBanner">
+    <div class="wb-item"><div class="wb-label">Semana</div><div class="wb-val teal" id="bPeriod">—</div></div>
+    <div class="wb-item"><div class="wb-label">Unidades</div><div class="wb-val white" id="bUnits">—</div></div>
+    <div class="wb-item"><div class="wb-label">Revenue</div><div class="wb-val teal" id="bRevenue">—</div></div>
+    <div class="wb-item"><div class="wb-label">Margen CLP</div><div class="wb-val green" id="bMargin">—</div></div>
+    <div class="wb-item"><div class="wb-label">Margen %</div><div class="wb-val white" id="bMarginPct">—</div></div>
+    <div class="wb-item"><div class="wb-label">ASP</div><div class="wb-val white" id="bAsp">—</div></div>
+    <div class="wb-item"><div class="wb-label">SKUs activos</div><div class="wb-val orange" id="bSkus">—</div></div>
+  </div>
+
+  <!-- ALERT -->
+  <div class="alert-banner good" id="alertBanner">
+    <span style="font-size:15px;flex-shrink:0" id="alertIcon">📈</span>
+    <span id="alertText"><strong>Peak de temporada confirmado.</strong> Las semanas 06-14 (23 u) y 06-21 (15 u) representan el 58% de las ventas totales del período. MFL01N escala a 18 u vendidas (ST 64.7%). MPK02 sube a 5 u con 27.5% ST. 6 SKUs sobre 40% de sell-through al 27 Jun.</span>
+  </div>
+
+  <!-- KPIs -->
+  <div class="section-title">Resumen General</div>
+  <div class="kpi-grid">
+    <div class="kpi-card" style="--accent:var(--teal)">
+      <div class="kpi-label">Unidades Totales</div>
+      <div class="kpi-value" id="kpiUnits">87</div>
+      <div class="kpi-sub" id="kpiUnitsSub">14 semanas · +15 sem. 06-21</div>
+    </div>
+    <div class="kpi-card" style="--accent:var(--teal)">
+      <div class="kpi-label">Revenue Total</div>
+      <div class="kpi-value" id="kpiRevenue">$4.44M</div>
+      <div class="kpi-sub">CLP públicos</div>
+    </div>
+    <div class="kpi-card" style="--accent:var(--green)">
+      <div class="kpi-label">Margen Total</div>
+      <div class="kpi-value" id="kpiMargin">$1.93M</div>
+      <div class="kpi-sub" id="kpiMarginSub" style="color:var(--green)">43.5% sobre revenue</div>
+    </div>
+    <div class="kpi-card" style="--accent:var(--yellow)">
+      <div class="kpi-label">ASP Promedio</div>
+      <div class="kpi-value" id="kpiAsp">$51K</div>
+      <div class="kpi-sub">CLP / unidad vendida</div>
+    </div>
+    <div class="kpi-card" style="--accent:var(--green)">
+      <div class="kpi-label">Sell-Through Prom.</div>
+      <div class="kpi-value" id="kpiST">30.8%</div>
+      <div class="kpi-sub" style="color:var(--green)">↑ Mejor desde inicio</div>
+      <div class="badge badge-ok">6 SKUs &gt;40%</div>
+    </div>
+    <div class="kpi-card" style="--accent:var(--muted)">
+      <div class="kpi-label">Inv. Remanente</div>
+      <div class="kpi-value" id="kpiInv">~179 u</div>
+      <div class="kpi-sub">al 06-27 (prom. tiendas)</div>
+    </div>
+  </div>
+
+  <!-- CHARTS -->
+  <div class="section-title">Evolución Semanal</div>
+  <div class="charts-row">
+    <div class="chart-card">
+      <div class="chart-title">Revenue y Margen — Semana a Semana (CLP)</div>
+      <div class="chart-wrap"><canvas id="chartWeekly"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Unidades Vendidas por Semana</div>
+      <div class="chart-wrap"><canvas id="chartUnits"></canvas></div>
+    </div>
+  </div>
+
+  <!-- SKU TABLE -->
+  <div class="section-title">Performance por SKU Base</div>
+  <div class="table-card">
+    <div class="table-header">
+      <span class="table-header-title" id="skuTableTitle">Acumulado · 14 SKUs · 14 sem. (23 Mar → 27 Jun)</span>
+      <span style="font-size:10px;color:var(--muted)">Ordenado por Revenue</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>SKU Base</th><th>Descripción</th><th>Uds.</th>
+          <th>Revenue CLP</th><th>Costo CLP</th><th>Margen CLP</th>
+          <th>Mg%</th><th>ASP CLP</th><th>Inv.(u)</th><th>Sell-Through</th>
+        </tr>
+      </thead>
+      <tbody id="skuBody"></tbody>
+    </table>
+  </div>
+
+  <!-- BOTTOM GRID -->
+  <div class="bottom-grid">
+    <div class="table-card">
+      <div class="table-header">
+        <span class="table-header-title">Heatmap — Unidades Semanales por SKU</span>
+        <span style="font-size:10px;color:var(--green)" id="heatSubtitle">● 06-21 nueva semana</span>
+      </div>
+      <div style="overflow-x:auto">
+      <table style="min-width:780px">
+        <thead>
+          <tr>
+            <th style="text-align:left;font-size:10px">SKU</th>
+            <th class="wk" id="h0">03-23</th><th class="wk" id="h1">03-29</th>
+            <th class="wk" id="h2">04-05</th><th class="wk" id="h3">04-12</th>
+            <th class="wk" id="h4">04-19</th><th class="wk" id="h5">04-26</th>
+            <th class="wk" id="h6">05-03</th><th class="wk" id="h7">05-10</th>
+            <th class="wk" id="h8">05-17</th><th class="wk" id="h9">05-24</th>
+            <th class="wk" id="h10">05-31</th><th class="wk" id="h11">06-07</th>
+            <th class="wk" id="h12">06-14★</th>
+            <th class="wk-new" id="h13" style="color:var(--green)">06-21●</th>
+            <th style="text-align:right;font-size:10px;color:var(--muted)">Tot.</th>
+          </tr>
+        </thead>
+        <tbody id="heatBody"></tbody>
+      </table>
+      </div>
+    </div>
+
+    <div>
+      <div class="table-card" style="margin-bottom:13px">
+        <div class="table-header">
+          <span class="table-header-title">Mix de Tallas (Uds. Vendidas)</span>
+        </div>
+        <table>
+          <thead><tr><th style="text-align:left">SKU</th><th class="sz">S</th><th class="sz">M</th><th class="sz">L</th><th class="sz">XL</th></tr></thead>
+          <tbody id="sizeBody"></tbody>
+        </table>
+      </div>
+      <div class="table-card">
+        <div class="table-header">
+          <span class="table-header-title">Inventario Remanente — 06-27</span>
+        </div>
+        <div id="invRank"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footnote">
+    Fuente: Base Sell-Out Paris _9_ · Filtro: Sku seller ∈ lista KAW26 · 52 SKUs de 77 solicitados (BAYO/HUEMUL/MELIMOYU sin datos en Paris)<br>
+    Margen = Revenue Público − Costo Paris · Sell-Through = Uds. Vendidas / (Vendidas + Inv. Remanente al 06-27) · KANO Commercial Planning
+  </div>
+</div>
+
+<script>
+const PERIODS=["2026-03-23 al 2026-03-28","2026-03-29 al 2026-04-04","2026-04-05 al 2026-04-11","2026-04-12 al 2026-04-18","2026-04-19 al 2026-04-25","2026-04-26 al 2026-05-02","2026-05-03 al 2026-05-09","2026-05-10 al 2026-05-16","2026-05-17 al 2026-05-23","2026-05-24 al 2026-05-30","2026-05-31 al 2026-06-06","2026-06-07 al 2026-06-13","2026-06-14 al 2026-06-20","2026-06-21 al 2026-06-27"];
+const LABELS=["03-23","03-29","04-05","04-12","04-19","04-26","05-03","05-10","05-17","05-24","05-31","06-07","06-14","06-21"];
+const NEW_WK=13, HOT_WK=12;
+
+const weeklyData=[
+  {label:"03-23",units:0, revenue:0,      cost:0,      margin:0,      margin_pct:0,   asp:0},
+  {label:"03-29",units:0, revenue:0,      cost:0,      margin:0,      margin_pct:0,   asp:0},
+  {label:"04-05",units:0, revenue:0,      cost:0,      margin:0,      margin_pct:0,   asp:0},
+  {label:"04-12",units:1, revenue:69990,  cost:34995,  margin:34995,  margin_pct:50.0,asp:69990},
+  {label:"04-19",units:0, revenue:0,      cost:0,      margin:0,      margin_pct:0,   asp:0},
+  {label:"04-26",units:3, revenue:160972, cost:87485,  margin:73487,  margin_pct:45.7,asp:53657},
+  {label:"05-03",units:8, revenue:563923, cost:294960, margin:268963, margin_pct:47.7,asp:70490},
+  {label:"05-10",units:5, revenue:443956, cost:234975, margin:208981, margin_pct:47.1,asp:88791},
+  {label:"05-17",units:11,revenue:514898, cost:279945, margin:234953, margin_pct:45.6,asp:46809},
+  {label:"05-24",units:5, revenue:189950, cost:94975,  margin:94975,  margin_pct:50.0,asp:37990},
+  {label:"05-31",units:9, revenue:480918, cost:267455, margin:213463, margin_pct:44.4,asp:53435},
+  {label:"06-07",units:7, revenue:528440, cost:292465, margin:235975, margin_pct:44.7,asp:75491},
+  {label:"06-14",units:23,revenue:997299, cost:567385, margin:429914, margin_pct:43.1,asp:43361},
+  {label:"06-21",units:15,revenue:607367, cost:349925, margin:257442, margin_pct:42.4,asp:40491},
+];
+
+const skuAgg=[
+  {sku:"KAW26-MJK01",  desc:"Tres en Uno Chaqueta",       units:6,  revenue:755946, cost:419970,margin:335976,margin_pct:44.4,asp:125991,last_inv:19.0, sell_through:24.0},
+  {sku:"KAW26-MPK02",  desc:"Parka Nieve Negra Masc.",     units:5,  revenue:657952, cost:349975,margin:307977,margin_pct:46.8,asp:131590,last_inv:13.2, sell_through:27.5},
+  {sku:"KAW26-WPK01V", desc:"Repreve Thin Parka Verde",   units:7,  revenue:468933, cost:244965,margin:223968,margin_pct:47.8,asp:66990, last_inv:8.3,  sell_through:45.7},
+  {sku:"KAW26-MPK01N", desc:"Repreve Thin Parka Masc.",   units:6,  revenue:384945, cost:209970,margin:174975,margin_pct:45.5,asp:64158, last_inv:12.3, sell_through:32.7},
+  {sku:"KAW26-MFL01N", desc:"Top Long Sleeve Masc.",      units:18, revenue:381842, cost:224910,margin:156932,margin_pct:41.1,asp:21213, last_inv:9.8,  sell_through:64.7},
+  {sku:"KAW26-WKF03N", desc:"Boucle Full Zipper",         units:8,  revenue:354934, cost:199960,margin:154974,margin_pct:43.7,asp:44367, last_inv:14.5, sell_through:35.6},
+  {sku:"KAW26-WPK01N", desc:"Repreve Thin Parka Fem.",    units:5,  revenue:307957, cost:174975,margin:132982,margin_pct:43.2,asp:61591, last_inv:14.0, sell_through:26.3},
+  {sku:"KAW26-MKF02T", desc:"Full Zipper Fleece Color",   units:7,  revenue:287936, cost:157465,margin:130471,margin_pct:45.3,asp:41134, last_inv:7.8,  sell_through:47.2},
+  {sku:"KAW26-MKF02N", desc:"Full Zipper Fleece Negro",   units:6,  revenue:253444, cost:134970,margin:118474,margin_pct:46.7,asp:42241, last_inv:16.0, sell_through:27.3},
+  {sku:"KAW26-WFL01N", desc:"Top Long Sleeve Fem.",       units:10, revenue:234906, cost:124950,margin:109956,margin_pct:46.8,asp:23491, last_inv:11.6, sell_through:46.2},
+  {sku:"KAW26-MPK01T", desc:"Repreve Thin Parka Tierra",  units:3,  revenue:174975, cost:104985,margin:69990, margin_pct:40.0,asp:58325, last_inv:9.8,  sell_through:23.5},
+  {sku:"KAW26-WPK03",  desc:"Parka Nieve Negra Fem.",     units:1,  revenue:125991, cost:69995, margin:55996, margin_pct:44.4,asp:125991,last_inv:8.8,  sell_through:10.2},
+  {sku:"KAW26-WKF01M", desc:"Microfleece Half Zip Fem.",  units:3,  revenue:97972,  cost:52485, margin:45487, margin_pct:46.4,asp:32657, last_inv:12.5, sell_through:19.4},
+  {sku:"KAW26-MKF01N", desc:"Microfleece Half Zip Masc.", units:2,  revenue:69980,  cost:34990, margin:34990, margin_pct:50.0,asp:34990, last_inv:17.7, sell_through:10.2},
+];
+
+const heatData=[
+  {sku:"KAW26-MFL01N", w:[0,0,0,0,0,0,0,0,1,1,0,1,8,7]},
+  {sku:"KAW26-MJK01",  w:[0,0,0,0,0,0,1,2,0,0,1,0,2,0]},
+  {sku:"KAW26-MKF01N", w:[0,0,0,0,0,1,0,0,0,0,1,0,0,0]},
+  {sku:"KAW26-MKF02N", w:[0,0,0,0,0,0,0,0,3,0,1,0,2,0]},
+  {sku:"KAW26-MKF02T", w:[0,0,0,0,0,0,0,0,1,1,2,0,3,0]},
+  {sku:"KAW26-MPK01N", w:[0,0,0,0,0,0,1,0,1,0,1,1,2,0]},
+  {sku:"KAW26-MPK01T", w:[0,0,0,0,0,0,0,0,0,0,0,2,1,0]},
+  {sku:"KAW26-MPK02",  w:[0,0,0,0,0,0,0,0,1,0,0,2,0,2]},
+  {sku:"KAW26-WFL01N", w:[0,0,0,0,0,0,0,0,3,2,0,0,2,3]},
+  {sku:"KAW26-WKF01M", w:[0,0,0,0,0,0,2,0,0,0,1,0,0,0]},
+  {sku:"KAW26-WKF03N", w:[0,0,0,0,0,0,2,1,0,0,1,0,2,2]},
+  {sku:"KAW26-WPK01N", w:[0,0,0,1,0,1,0,0,0,0,1,1,0,1]},
+  {sku:"KAW26-WPK01V", w:[0,0,0,0,0,1,1,2,1,1,0,0,1,0]},
+  {sku:"KAW26-WPK03",  w:[0,0,0,0,0,0,1,0,0,0,0,0,0,0]},
+];
+
+const weeklyDetail={
+  "KAW26-MFL01N": [{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:19992,c:12495},{u:1,r:24990,c:12495},{u:0,r:0,c:0},{u:1,r:17493,c:12495},{u:8,r:172431,c:99960},{u:7,r:146936,c:87465}],
+  "KAW26-MJK01":  [{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:125991,c:69995},{u:2,r:279980,c:139990},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:111992,c:69995},{u:0,r:0,c:0},{u:2,r:237983,c:139990},{u:0,r:0,c:0}],
+  "KAW26-MKF01N": [{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:34990,c:17495},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:34990,c:17495},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0}],
+  "KAW26-MKF02N": [{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:3,r:127472,c:67485},{u:0,r:0,c:0},{u:1,r:44990,c:22495},{u:0,r:0,c:0},{u:2,r:80982,c:44990},{u:0,r:0,c:0}],
+  "KAW26-MKF02T": [{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:35992,c:22495},{u:1,r:44990,c:22495},{u:2,r:89980,c:44990},{u:0,r:0,c:0},{u:3,r:116974,c:67485},{u:0,r:0,c:0}],
+  "KAW26-MPK01N": [{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:69990,c:34995},{u:0,r:0,c:0},{u:1,r:62991,c:34995},{u:0,r:0,c:0},{u:1,r:69990,c:34995},{u:1,r:55992,c:34995},{u:2,r:125982,c:69990},{u:0,r:0,c:0}],
+  "KAW26-MPK01T": [{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:2,r:111984,c:69990},{u:1,r:62991,c:34995},{u:0,r:0,c:0}],
+  "KAW26-MPK02":  [{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:125990,c:69995},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:2,r:279980,c:139990},{u:0,r:0,c:0},{u:2,r:251982,c:139990}],
+  "KAW26-WFL01N": [{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:3,r:72471,c:37485},{u:2,r:49980,c:24990},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:2,r:44982,c:24990},{u:3,r:67473,c:37485}],
+  "KAW26-WKF01M": [{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:2,r:69980,c:34990},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:27992,c:17495},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0}],
+  "KAW26-WKF03N": [{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:2,r:94982,c:49990},{u:1,r:44992,c:24995},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:44992,c:24995},{u:0,r:0,c:0},{u:2,r:84984,c:49990},{u:2,r:84984,c:49990}],
+  "KAW26-WPK01N": [{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:69990,c:34995},{u:0,r:0,c:0},{u:1,r:62991,c:34995},{u:0,r:0,c:0},{u:0,r:1,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:55992,c:34995},{u:1,r:62991,c:34995},{u:0,r:0,c:0},{u:1,r:55992,c:34995}],
+  "KAW26-WPK01V": [{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:62991,c:34995},{u:1,r:76989,c:34995},{u:2,r:118983,c:69990},{u:1,r:69990,c:34995},{u:1,r:69990,c:34995},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:69990,c:34995},{u:0,r:0,c:0}],
+  "KAW26-WPK03":  [{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:125991,c:69995},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0}],
+};
+
+const sizeData=[
+  {sku:"KAW26-MFL01N",S:0,M:5,L:8,XL:5},{sku:"KAW26-MJK01", S:1,M:4,L:1,XL:0},
+  {sku:"KAW26-MKF01N",S:0,M:1,L:1,XL:0},{sku:"KAW26-MKF02N",S:1,M:2,L:2,XL:1},
+  {sku:"KAW26-MKF02T",S:1,M:2,L:4,XL:0},{sku:"KAW26-MPK01N",S:0,M:3,L:0,XL:3},
+  {sku:"KAW26-MPK01T",S:0,M:0,L:1,XL:2},{sku:"KAW26-MPK02", S:0,M:2,L:3,XL:0},
+  {sku:"KAW26-WFL01N",S:0,M:4,L:6,XL:0},{sku:"KAW26-WKF01M",S:0,M:0,L:3,XL:0},
+  {sku:"KAW26-WKF03N",S:0,M:3,L:3,XL:2},{sku:"KAW26-WPK01N",S:0,M:1,L:2,XL:2},
+  {sku:"KAW26-WPK01V",S:1,M:2,L:2,XL:2},{sku:"KAW26-WPK03", S:0,M:0,L:1,XL:0},
+];
+
+const invData=[
+  {sku:"KAW26-MJK01",  inv:19.0},{sku:"KAW26-MKF01N", inv:17.7},{sku:"KAW26-MKF02N", inv:16.0},
+  {sku:"KAW26-WKF03N", inv:14.5},{sku:"KAW26-WPK01N", inv:14.0},{sku:"KAW26-MPK02",  inv:13.2},
+  {sku:"KAW26-WKF01M", inv:12.5},{sku:"KAW26-MPK01N", inv:12.3},{sku:"KAW26-WFL01N", inv:11.6},
+  {sku:"KAW26-MFL01N", inv:9.8}, {sku:"KAW26-MPK01T", inv:9.8}, {sku:"KAW26-WPK03",  inv:8.8},
+  {sku:"KAW26-WPK01V", inv:8.3}, {sku:"KAW26-MKF02T", inv:7.8},
+];
+
+// ── HELPERS ────────────────────────────────────────────────────────────────
+const fmtK=v=>v===0?'—':'$'+(v/1000000>=1?(v/1000000).toFixed(2)+'M':(v/1000).toFixed(0)+'K');
+const fmtF=v=>v===0?'—':'$'+v.toLocaleString('es-CL');
+const hc=v=>v===0?'heat-zero':v===1?'heat-1':v===2?'heat-2':v<=3?'heat-3':v<=5?'heat-4':v<=7?'heat-5':'heat-6';
+const maxRev=Math.max(...weeklyData.map(d=>d.revenue));
+const maxU=Math.max(...weeklyData.map(d=>d.units));
+
+// ── CHARTS ─────────────────────────────────────────────────────────────────
+const cBase={
+  responsive:true,maintainAspectRatio:false,
+  plugins:{legend:{labels:{color:'#8892a4',font:{family:'DM Mono',size:10}}}},
+  scales:{
+    x:{grid:{color:'#1e2d48'},ticks:{color:'#8892a4',font:{family:'DM Mono',size:10}}},
+    y:{grid:{color:'#1e2d48'},ticks:{color:'#8892a4',font:{family:'DM Mono',size:10}}},
+  }
+};
+
+const mkBgRev=wi=>weeklyData.map((d,i)=>{
+  if(wi==='ALL') return i===NEW_WK?'#1bd97b50':i===HOT_WK?'#f5c51850':d.revenue===maxRev?'#00c2a850':'#00c2a820';
+  return i===wi?'#00c2a870':'#00c2a812';
+});
+const mkBgU=wi=>weeklyData.map((d,i)=>{
+  if(wi==='ALL') return i===NEW_WK?'#1bd97b60':i===HOT_WK?'#f5631870':d.units===maxU?'#f5631860':'#00c2a820';
+  return i===wi?'#f5631870':'#00c2a812';
+});
+const mkBdRev=wi=>weeklyData.map((_,i)=>i===NEW_WK?'#1bd97b':i===HOT_WK?'#f5c518':'#00c2a8');
+const mkBdU=wi=>weeklyData.map((d,i)=>i===NEW_WK?'#1bd97b':i===HOT_WK?'#f56318':d.units===maxU&&wi==='ALL'?'#f56318':'#00c2a8');
+
+const chartRev=new Chart(document.getElementById('chartWeekly'),{
+  type:'bar',
+  data:{labels:weeklyData.map(d=>d.label),datasets:[
+    {label:'Revenue',data:weeklyData.map(d=>d.revenue),backgroundColor:mkBgRev('ALL'),borderColor:mkBdRev('ALL'),borderWidth:1.5,borderRadius:3},
+    {label:'Margen',data:weeklyData.map(d=>d.margin),type:'line',tension:0.4,fill:false,borderColor:'#1bd97b',borderWidth:2,pointRadius:weeklyData.map((_,i)=>i===NEW_WK||i===HOT_WK?4:2),pointBackgroundColor:weeklyData.map((_,i)=>i===NEW_WK?'#1bd97b':i===HOT_WK?'#f5c518':'#1bd97b80'),backgroundColor:'transparent'}
+  ]},
+  options:{...cBase,scales:{...cBase.scales,y:{...cBase.scales.y,ticks:{...cBase.scales.y.ticks,callback:v=>'$'+(v/1000).toFixed(0)+'K'}}}}
+});
+const chartU=new Chart(document.getElementById('chartUnits'),{
+  type:'bar',
+  data:{labels:weeklyData.map(d=>d.label),datasets:[{
+    label:'Unidades',data:weeklyData.map(d=>d.units),
+    backgroundColor:mkBgU('ALL'),borderColor:mkBdU('ALL'),borderWidth:1.5,borderRadius:4
+  }]},
+  options:{...cBase,plugins:{...cBase.plugins,legend:{display:false}}}
+});
+
+// ── RENDER ─────────────────────────────────────────────────────────────────
+function renderSkuTable(wi){
+  const body=document.getElementById('skuBody');
+  const title=document.getElementById('skuTableTitle');
+  let rows;
+  if(wi==='ALL'){
+    title.textContent='Acumulado · 14 SKUs · 14 sem. (23 Mar → 27 Jun)';
+    rows=skuAgg.map(r=>({...r}));
+  } else {
+    title.textContent=`Semana ${LABELS[wi]} · ${PERIODS[wi].replace(' al ',' → ')}`;
+    rows=skuAgg.map(r=>{
+      const d=weeklyDetail[r.sku][wi];
+      const mg=d.r>0?(d.r-d.c)/d.r*100:0;
+      return{sku:r.sku,desc:r.desc,units:d.u,revenue:d.r,cost:d.c,margin:d.r-d.c,
+             margin_pct:+mg.toFixed(1),asp:d.u>0?Math.round(d.r/d.u):0,
+             last_inv:r.last_inv,sell_through:r.sell_through};
+    }).sort((a,b)=>b.revenue-a.revenue);
+  }
+  body.innerHTML=rows.map(r=>{
+    const sv=r.sell_through;
+    const sc=sv>=60?'st-hot':sv>=40?'st-ok':sv>=25?'st-mid':'st-low';
+    const scol=sv>=60?'#00e8d0':sv>=40?'#1bd97b':sv>=25?'#f5c518':'#e03030';
+    const mc=r.margin_pct>=46?'ok':r.margin_pct>=40?'warn':'red';
+    const isNew=wi===NEW_WK;
+    const star=isNew&&r.units>=3?`<span style="font-size:9px;color:#f5c518;margin-left:3px">★</span>`:'';
+    return`<tr class="${r.units===0?'zero-row':''}">
+      <td>${r.sku}</td><td title="${r.desc}">${r.desc}</td>
+      <td>${r.units||'—'}${star}</td><td>${fmtK(r.revenue)}</td><td>${fmtK(r.cost)}</td><td>${fmtK(r.margin)}</td>
+      <td>${r.margin_pct>0?`<span class="mg ${mc}">${r.margin_pct.toFixed(1)}%</span>`:'—'}</td>
+      <td>${r.asp>0?fmtF(r.asp):'—'}</td>
+      <td>${r.last_inv.toFixed(1)}</td>
+      <td><div class="st-wrap"><div class="st-bg"><div class="st-fill" style="width:${Math.min(sv,100)}%;background:${scol}"></div></div><span class="st-v ${sc}">${sv.toFixed(1)}%</span></div></td>
+    </tr>`;
+  }).join('');
+}
+
+function renderHeatmap(wi){
+  document.getElementById('heatSubtitle').textContent=wi==='ALL'?'● 06-21 nueva semana':`Semana ${LABELS[wi]} resaltada`;
+  for(let i=0;i<14;i++){
+    const th=document.getElementById('h'+i);
+    if(wi!=='ALL'&&i===wi){th.style.color='var(--teal)';th.style.borderBottom='2px solid var(--teal)';}
+    else if(i===NEW_WK&&wi==='ALL'){th.style.color='var(--green)';th.style.borderBottom='';}
+    else if(i===HOT_WK&&wi==='ALL'){th.style.color='var(--yellow)';th.style.borderBottom='';}
+    else{th.style.color='';th.style.borderBottom='';}
+  }
+  document.getElementById('heatBody').innerHTML=heatData.map(r=>{
+    const total=r.w.reduce((a,b)=>a+b,0);
+    const cells=r.w.map((v,i)=>{
+      const isN=i===NEW_WK;
+      const cls=wi!=='ALL'&&i===wi?(isN?'wk-new-hi':'wk-hi'):(isN?'wk-new':'wk');
+      return`<td class="${cls} ${hc(v)}">${v===0?'·':v}</td>`;
+    }).join('');
+    return`<tr><td style="font-family:'DM Mono',monospace;font-size:10px">${r.sku}</td>${cells}<td style="text-align:right;font-family:'DM Mono',monospace;font-size:11px;color:var(--teal);font-weight:600">${total||'—'}</td></tr>`;
+  }).join('');
+}
+
+function renderSizeTable(wi){
+  const body=document.getElementById('sizeBody');
+  if(wi==='ALL'){
+    body.innerHTML=sizeData.map(r=>{
+      const tot=r.S+r.M+r.L+r.XL;
+      const c=v=>`<td class="sz ${v>0?'sz-pos':'sz-0'}">${v>0?v:'·'}</td>`;
+      return`<tr class="${tot===0?'zero-row':''}"><td>${r.sku}</td>${c(r.S)}${c(r.M)}${c(r.L)}${c(r.XL)}</tr>`;
+    }).join('');
+  } else {
+    body.innerHTML=skuAgg.map(r=>{
+      const d=weeklyDetail[r.sku][wi];
+      return`<tr class="${d.u===0?'zero-row':''}"><td>${r.sku}</td><td class="sz" colspan="4" style="text-align:center;color:${d.u>0?'var(--teal)':'#253048'}">${d.u>0?d.u+' u':'·'}</td></tr>`;
+    }).join('');
+  }
+}
+
+function updateKpis(wi){
+  const banner=document.getElementById('weekBanner');
+  if(wi==='ALL'){
+    const tu=skuAgg.reduce((a,r)=>a+r.units,0);
+    const tr=skuAgg.reduce((a,r)=>a+r.revenue,0);
+    const tc=skuAgg.reduce((a,r)=>a+r.cost,0);
+    const tm=tr-tc;
+    const asp=tu>0?Math.round(tr/tu):0;
+    const avgST=(skuAgg.reduce((a,r)=>a+r.sell_through,0)/skuAgg.length).toFixed(1);
+    document.getElementById('kpiUnits').textContent=tu;
+    document.getElementById('kpiUnitsSub').textContent='14 semanas · +15 sem. 06-21';
+    document.getElementById('kpiRevenue').textContent=fmtK(tr);
+    document.getElementById('kpiMargin').textContent=fmtK(tm);
+    document.getElementById('kpiMarginSub').textContent=tr>0?(tm/tr*100).toFixed(1)+'% sobre revenue':'—';
+    document.getElementById('kpiAsp').textContent=asp>0?'$'+(asp/1000).toFixed(0)+'K':'—';
+    document.getElementById('kpiST').textContent=avgST+'%';
+    document.getElementById('kpiInv').textContent='~'+Math.round(invData.reduce((a,r)=>a+r.inv,0))+' u';
+    banner.classList.remove('visible');
+  } else {
+    const wd=weeklyData[wi];
+    const skusA=Object.values(weeklyDetail).filter(w=>w[wi].u>0).length;
+    document.getElementById('kpiUnits').textContent=wd.units||'0';
+    document.getElementById('kpiUnitsSub').textContent=PERIODS[wi].split(' al ')[0];
+    document.getElementById('kpiRevenue').textContent=fmtK(wd.revenue);
+    document.getElementById('kpiMargin').textContent=fmtK(wd.margin);
+    document.getElementById('kpiMarginSub').textContent=wd.revenue>0?wd.margin_pct+'% sobre revenue':'—';
+    document.getElementById('kpiAsp').textContent=wd.asp>0?'$'+(wd.asp/1000).toFixed(0)+'K':'—';
+    document.getElementById('kpiST').textContent='—';
+    document.getElementById('kpiInv').textContent='—';
+    const lbl=LABELS[wi]+(wi===HOT_WK?' ★':wi===NEW_WK?' ●':'');
+    document.getElementById('bPeriod').textContent=lbl;
+    document.getElementById('bPeriod').className='wb-val '+(wi===HOT_WK?'hot':wi===NEW_WK?'green':'teal');
+    document.getElementById('bUnits').textContent=wd.units||'0';
+    document.getElementById('bRevenue').textContent=fmtK(wd.revenue);
+    document.getElementById('bMargin').textContent=fmtK(wd.margin);
+    document.getElementById('bMarginPct').textContent=wd.revenue>0?wd.margin_pct+'%':'—';
+    document.getElementById('bAsp').textContent=wd.asp>0?'$'+wd.asp.toLocaleString('es-CL'):'—';
+    document.getElementById('bSkus').textContent=skusA+' / 14';
+    banner.classList.add('visible');
+    banner.className='week-banner visible'+(wi===HOT_WK?' hot':'');
+  }
+}
+
+function updateCharts(wi){
+  chartRev.data.datasets[0].backgroundColor=mkBgRev(wi);
+  chartRev.data.datasets[0].borderColor=mkBdRev(wi);
+  chartRev.update('none');
+  chartU.data.datasets[0].backgroundColor=mkBgU(wi);
+  chartU.data.datasets[0].borderColor=mkBdU(wi);
+  chartU.update('none');
+}
+
+function updateAlert(wi){
+  const el=document.getElementById('alertText');
+  const ab=document.getElementById('alertBanner');
+  const ai=document.getElementById('alertIcon');
+  if(wi==='ALL'){
+    ab.className='alert-banner good'; ai.textContent='📈';
+    el.innerHTML='<strong>Peak de temporada confirmado.</strong> Las semanas 06-14 (23 u) y 06-21 (15 u) representan el 58% de las ventas totales del período. MFL01N escala a 18 u vendidas (ST 64.7%). MPK02 sube a 5 u con 27.5% ST. <strong>6 SKUs sobre 40% de sell-through</strong> al 27 Jun.';
+  } else if(wi===HOT_WK){
+    ab.className='alert-banner hot'; ai.textContent='🔥';
+    const top=Object.entries(weeklyDetail).sort((a,b)=>b[1][wi].r-a[1][wi].r)[0];
+    const act=Object.entries(weeklyDetail).filter(([k,v])=>v[wi].u>0).map(([k])=>k.replace('KAW26-',''));
+    el.innerHTML=`<strong>★ Semana ${LABELS[wi]} — RÉCORD del período:</strong> 23 u · $997K · Mg 43.1% · ${act.length} SKUs activos: <em>${act.join(', ')}</em>. Líder: <strong>${top[0].replace('KAW26-','')}</strong> ($${top[1][wi].r.toLocaleString('es-CL')}).`;
+  } else if(wi===NEW_WK){
+    ab.className='alert-banner good'; ai.textContent='🌱';
+    const act=Object.entries(weeklyDetail).filter(([k,v])=>v[wi].u>0).map(([k])=>k.replace('KAW26-',''));
+    const top=Object.entries(weeklyDetail).sort((a,b)=>b[1][wi].r-a[1][wi].r)[0];
+    el.innerHTML=`<strong>● Semana ${LABELS[wi]} — nueva:</strong> 15 u · $607K · Mg 42.4% · ${act.length} SKUs activos: <em>${act.join(', ')}</em>. MFL01N con 7 u lidera. MPK02 sigue rotando (2 u). Tendencia sostenida.`;
+  } else {
+    const wd=weeklyData[wi];
+    if(wd.units===0){
+      ab.className='alert-banner warn'; ai.textContent='—';
+      el.innerHTML=`<strong>Semana ${LABELS[wi]}:</strong> Sin ventas registradas.`;
+    } else {
+      ab.className='alert-banner warn'; ai.textContent='ℹ️';
+      const act=Object.entries(weeklyDetail).filter(([k,v])=>v[wi].u>0).map(([k])=>k.replace('KAW26-',''));
+      const top=Object.entries(weeklyDetail).sort((a,b)=>b[1][wi].r-a[1][wi].r)[0];
+      el.innerHTML=`<strong>Semana ${LABELS[wi]}:</strong> ${wd.units} u · ${fmtK(wd.revenue)} · Mg ${wd.margin_pct}% · SKUs activos: <em>${act.join(', ')}</em>. Líder: <strong>${top[0].replace('KAW26-','')}</strong>.`;
+    }
+  }
+}
+
+function filterWeek(wi){
+  document.querySelectorAll('.wk-btn').forEach(b=>b.classList.remove('active'));
+  if(wi==='ALL') document.querySelector('.wk-btn.all').classList.add('active');
+  else document.querySelectorAll('.wk-btn:not(.all)')[wi].classList.add('active');
+  updateKpis(wi);
+  renderSkuTable(wi);
+  renderHeatmap(wi);
+  renderSizeTable(wi);
+  updateCharts(wi);
+  updateAlert(wi);
+}
+
+// ── INIT ───────────────────────────────────────────────────────────────────
+const maxInv=Math.max(...invData.map(r=>r.inv));
+document.getElementById('invRank').innerHTML=invData.map(r=>
+  `<div class="inv-row"><span class="inv-sku">${r.sku}</span><div class="inv-bg"><div class="inv-bar" style="width:${(r.inv/maxInv*100).toFixed(1)}%"></div></div><span class="inv-v">${r.inv.toFixed(1)} u</span></div>`
+).join('');
+
+filterWeek('ALL');
+</script>
+</body>
+</html>
