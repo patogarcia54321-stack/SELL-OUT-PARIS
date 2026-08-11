@@ -59,7 +59,7 @@ body{background:var(--navy);color:var(--text);font-family:'Inter',sans-serif;fon
 .kpi-value{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;line-height:1}
 .kpi-sub{font-size:10px;color:var(--muted);margin-top:3px}
 .badge{display:inline-block;padding:2px 6px;border-radius:20px;font-family:'DM Mono',monospace;font-size:10px;margin-top:3px}
-.badge-ok{background:#0a2018;color:var(--green)}.badge-warn{background:#2a1a08;color:var(--orange)}
+.badge-ok{background:#0a2018;color:var(--green)}.badge-warn{background:#2a1a08;color:var(--orange)}.badge-hot{background:#1a1a08;color:var(--yellow)}
 .charts-row{display:grid;grid-template-columns:1.6fr 1fr;gap:11px;margin-bottom:16px}
 .chart-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px}
 .chart-title{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:9px}
@@ -126,22 +126,20 @@ td.sz{text-align:center;font-family:'DM Mono',monospace;font-size:11px}
 </style>
 </head>
 <body>
-
 <div class="header">
   <div>
     <div class="header-tag">▸ KANO · Paris Chile · Categoría Outdoor</div>
-    <div class="header-title">KANO <span>Outdoor</span> — Sell-Out INV26 <span class="new-badge">07-19 nueva</span></div>
+    <div class="header-title">KANO <span>Outdoor</span> — Sell-Out INV26 <span class="new-badge">07-26 · 08-03 nuevas</span></div>
     <div class="header-sub">Subdepartamento OUTDOOR · 14 SKUs · 6 tiendas · Temporada Invierno 2026</div>
   </div>
   <div class="header-meta">
-    <div>Período <strong>23 Mar → 25 Jul 2026</strong></div>
-    <div>18 semanas · actualizado <strong>03 Ago 2026</strong></div>
-    <div>Inventario real <strong>996 u en 6 tiendas</strong></div>
-    <div>Fuente <strong>Base_sell_out_Paris__12_ (v2)</strong></div>
+    <div>Período <strong>23 Mar → 10 Ago 2026</strong></div>
+    <div>20 semanas · actualizado <strong>11 Ago 2026</strong></div>
+    <div>Inventario real <strong>975 u en 6 tiendas</strong></div>
+    <div>Fuente <strong>Base_sell_out_Paris__13_</strong></div>
   </div>
 </div>
 
-<!-- FILTER BAR -->
 <div class="filter-bar">
   <span class="filter-label">Sem →</span>
   <button class="wk-btn all active" onclick="filterWeek('ALL')">Todas</button>
@@ -163,11 +161,12 @@ td.sz{text-align:center;font-family:'DM Mono',monospace;font-size:11px}
   <button class="wk-btn" onclick="filterWeek(14)">06-28</button>
   <button class="wk-btn" onclick="filterWeek(15)">07-05</button>
   <button class="wk-btn adj-wk" onclick="filterWeek(16)">07-12 ↩</button>
-  <button class="wk-btn new-wk" onclick="filterWeek(17)">07-19 ●</button>
+  <button class="wk-btn" onclick="filterWeek(17)">07-19</button>
+  <button class="wk-btn new-wk" onclick="filterWeek(18)">07-26 ●</button>
+  <button class="wk-btn new-wk" onclick="filterWeek(19)">08-03 ●</button>
 </div>
 
 <div class="main">
-
   <div class="week-banner blue" id="weekBanner">
     <div class="wb-item"><div class="wb-label">Semana</div><div class="wb-val c-teal" id="bPeriod">—</div></div>
     <div class="wb-item"><div class="wb-label">Unidades</div><div class="wb-val c-white" id="bUnits">—</div></div>
@@ -180,41 +179,41 @@ td.sz{text-align:center;font-family:'DM Mono',monospace;font-size:11px}
 
   <div class="alert-banner good" id="alertBanner">
     <span style="font-size:15px;flex-shrink:0" id="alertIcon">📊</span>
-    <span id="alertText"><strong>18 semanas · peak de temporada en marcha.</strong> Sem. 07-19: 8 u y $315K — ritmo estable post-peak. MFL01N alcanza 33 u vendidas (ST 44.6%), ya con riesgo real de quiebre en L/M (solo 41 u en tiendas). MKF02T sube a 10 u (ST 18.5%). Sem. 07-12 corregida: 4 u limpias sin ajustes negativos. Acumulado total: <strong>133 u · $5.24M</strong>.</span>
+    <span id="alertText"><strong>20 semanas · fin del peak de invierno.</strong> Sem. 08-03 es la 2ª mejor semana post-récord: 13 u y $774K liderada por MPK02 (2 u, $252K) y MJK01 (1 u, $126K). MFL01N supera 50% de sell-through (39 u vendidas, 36 u en tiendas). Acumulado: <strong>153 u · $6.59M · Mg 43.1%</strong>. Inventario real: <strong>975 u</strong>.</span>
   </div>
 
   <div class="section-title">Resumen General</div>
   <div class="kpi-grid">
     <div class="kpi-card" style="--accent:var(--teal)">
       <div class="kpi-label">Unidades Totales</div>
-      <div class="kpi-value" id="kpiUnits">133</div>
-      <div class="kpi-sub" id="kpiUnitsSub">18 semanas · +8 u sem. 07-19</div>
+      <div class="kpi-value" id="kpiUnits">153</div>
+      <div class="kpi-sub" id="kpiUnitsSub">20 sem · +22 u (07-26 + 08-03)</div>
     </div>
     <div class="kpi-card" style="--accent:var(--teal)">
       <div class="kpi-label">Revenue Total</div>
-      <div class="kpi-value" id="kpiRevenue">$5.24M</div>
+      <div class="kpi-value" id="kpiRevenue">$6.59M</div>
       <div class="kpi-sub">CLP públicos</div>
     </div>
     <div class="kpi-card" style="--accent:var(--green)">
       <div class="kpi-label">Margen Total</div>
-      <div class="kpi-value" id="kpiMargin">$2.27M</div>
-      <div class="kpi-sub" id="kpiMarginSub" style="color:var(--green)">43.3% sobre revenue</div>
+      <div class="kpi-value" id="kpiMargin">$2.84M</div>
+      <div class="kpi-sub" id="kpiMarginSub" style="color:var(--green)">43.1% sobre revenue</div>
     </div>
     <div class="kpi-card" style="--accent:var(--yellow)">
       <div class="kpi-label">ASP Promedio</div>
-      <div class="kpi-value" id="kpiAsp">$39K</div>
+      <div class="kpi-value" id="kpiAsp">$43K</div>
       <div class="kpi-sub">CLP / unidad</div>
     </div>
     <div class="kpi-card" style="--accent:var(--green)">
       <div class="kpi-label">Sell-Through Prom.</div>
-      <div class="kpi-value" id="kpiST">11.8%</div>
-      <div class="kpi-sub" style="color:var(--muted)">sobre inv. real (996 u)</div>
-      <div class="badge badge-ok">MFL01N 44.6% · WFL01N 32%</div>
+      <div class="kpi-value" id="kpiST">13.6%</div>
+      <div class="kpi-sub" style="color:var(--muted)">sobre inv. real (975 u)</div>
+      <div class="badge badge-ok">MFL01N 52% · WFL01N 33%</div>
     </div>
     <div class="kpi-card" style="--accent:var(--orange)">
       <div class="kpi-label">Inv. Remanente</div>
-      <div class="kpi-value" id="kpiInv">996 u</div>
-      <div class="kpi-sub">suma real 6 tiendas al 25-Jul</div>
+      <div class="kpi-value" id="kpiInv">975 u</div>
+      <div class="kpi-sub">suma real 6 tiendas al 10-Ago</div>
     </div>
   </div>
 
@@ -233,7 +232,7 @@ td.sz{text-align:center;font-family:'DM Mono',monospace;font-size:11px}
   <div class="section-title">Performance por SKU Base</div>
   <div class="table-card">
     <div class="table-header">
-      <span class="table-header-title" id="skuTableTitle">Acumulado · 14 SKUs · 18 semanas · ST sobre inv. real</span>
+      <span class="table-header-title" id="skuTableTitle">Acumulado · 14 SKUs · 20 semanas · ST sobre inv. real</span>
       <span style="font-size:10px;color:var(--muted)">Ordenado por Revenue</span>
     </div>
     <table>
@@ -252,10 +251,10 @@ td.sz{text-align:center;font-family:'DM Mono',monospace;font-size:11px}
     <div class="table-card">
       <div class="table-header">
         <span class="table-header-title">Heatmap — Unidades Semanales por SKU</span>
-        <span style="font-size:10px;color:var(--green)" id="heatSubtitle">● 07-19 nueva semana</span>
+        <span style="font-size:10px;color:var(--green)" id="heatSubtitle">● 07-26 y 08-03 nuevas</span>
       </div>
       <div style="overflow-x:auto">
-      <table style="min-width:960px">
+      <table style="min-width:1020px">
         <thead>
           <tr>
             <th style="text-align:left;font-size:9px">SKU</th>
@@ -269,7 +268,9 @@ td.sz{text-align:center;font-family:'DM Mono',monospace;font-size:11px}
             <th class="wk" id="h13">06-21</th><th class="wk" id="h14">06-28</th>
             <th class="wk" id="h15">07-05</th>
             <th class="wk-adj" id="h16" style="color:var(--red)">07-12↩</th>
-            <th class="wk-new" id="h17" style="color:var(--green)">07-19●</th>
+            <th class="wk" id="h17">07-19</th>
+            <th class="wk-new" id="h18" style="color:var(--green)">07-26●</th>
+            <th class="wk-new" id="h19" style="color:var(--green)">08-03●</th>
             <th style="text-align:right;font-size:9px;color:var(--muted)">Tot.</th>
           </tr>
         </thead>
@@ -280,18 +281,18 @@ td.sz{text-align:center;font-family:'DM Mono',monospace;font-size:11px}
 
     <div class="inv-panel">
       <div class="table-card" style="margin-bottom:0">
-        <div class="table-header"><span class="table-header-title">Inventario Real por SKU — 25 Jul</span></div>
+        <div class="table-header"><span class="table-header-title">Inventario Real por SKU — 10 Ago</span></div>
         <div class="inv-chips">
-          <span class="inv-chip total"><strong>996 u</strong> total</span>
-          <span class="inv-chip">L <strong>~345</strong></span>
-          <span class="inv-chip">M <strong>~350</strong></span>
-          <span class="inv-chip">S <strong>~130</strong></span>
+          <span class="inv-chip total"><strong>975 u</strong> total</span>
+          <span class="inv-chip">L <strong>~336</strong></span>
+          <span class="inv-chip">M <strong>~341</strong></span>
+          <span class="inv-chip">S <strong>~127</strong></span>
           <span class="inv-chip">XL <strong>~171</strong></span>
         </div>
         <div id="invRank"></div>
       </div>
       <div class="table-card" style="margin-bottom:0">
-        <div class="table-header"><span class="table-header-title">Inventario por Tienda — 25 Jul</span></div>
+        <div class="table-header"><span class="table-header-title">Inventario por Tienda — 10 Ago</span></div>
         <div id="storeRank"></div>
       </div>
       <div class="table-card" style="margin-bottom:0">
@@ -305,15 +306,15 @@ td.sz{text-align:center;font-family:'DM Mono',monospace;font-size:11px}
   </div>
 
   <div class="footnote">
-    Fuente: Base_sell_out_Paris__12_ (v2) · 6 tiendas: 16, 22, 25, 41, 107, 109 · Inventario = suma real de todas las tiendas<br>
-    07-12 ↩ contiene ajuste negativo en WKF03N (-1 u) · 07-19 nueva semana · KANO Commercial Planning
+    Fuente: Base_sell_out_Paris__13_ · 6 tiendas: 16, 22, 25, 41, 107, 109 · Inventario = suma real en tiendas al 10 Ago<br>
+    07-12 ↩ contiene ajuste negativo WKF03N (-1 u) · Sem. 07-26 y 08-03: Sku seller NaN en fuente, reconstruido desde COD_PROVEEDOR · KANO Commercial Planning
   </div>
 </div>
 
 <script>
-const PERIODS=["2026-03-23 al 2026-03-28","2026-03-29 al 2026-04-04","2026-04-05 al 2026-04-11","2026-04-12 al 2026-04-18","2026-04-19 al 2026-04-25","2026-04-26 al 2026-05-02","2026-05-03 al 2026-05-09","2026-05-10 al 2026-05-16","2026-05-17 al 2026-05-23","2026-05-24 al 2026-05-30","2026-05-31 al 2026-06-06","2026-06-07 al 2026-06-13","2026-06-14 al 2026-06-20","2026-06-21 al 2026-06-27","2026-06-28 al 2026-07-04","2026-07-05 al 2026-07-11","2026-07-12 al 2026-07-18","2026-07-19 al 2026-07-25"];
-const LABELS=["03-23","03-29","04-05","04-12","04-19","04-26","05-03","05-10","05-17","05-24","05-31","06-07","06-14","06-21","06-28","07-05","07-12","07-19"];
-const HOT_WK=12,NEW_WK=17,ADJ_WK=16;
+const PERIODS=["2026-03-23 al 2026-03-28","2026-03-29 al 2026-04-04","2026-04-05 al 2026-04-11","2026-04-12 al 2026-04-18","2026-04-19 al 2026-04-25","2026-04-26 al 2026-05-02","2026-05-03 al 2026-05-09","2026-05-10 al 2026-05-16","2026-05-17 al 2026-05-23","2026-05-24 al 2026-05-30","2026-05-31 al 2026-06-06","2026-06-07 al 2026-06-13","2026-06-14 al 2026-06-20","2026-06-21 al 2026-06-27","2026-06-28 al 2026-07-04","2026-07-05 al 2026-07-11","2026-07-12 al 2026-07-18","2026-07-19 al 2026-07-25","2026-07-26 al 2026-08-02","2026-08-03 al 2026-08-10"];
+const LABELS=["03-23","03-29","04-05","04-12","04-19","04-26","05-03","05-10","05-17","05-24","05-31","06-07","06-14","06-21","06-28","07-05","07-12","07-19","07-26","08-03"];
+const HOT_WK=12, ADJ_WK=16, NEW_WK1=18, NEW_WK2=19;
 
 const weeklyData=[
   {label:"03-23",units:0, revenue:0,       cost:0,      margin:0,      margin_pct:0,   asp:0},
@@ -334,86 +335,88 @@ const weeklyData=[
   {label:"07-05",units:18,revenue:538341,  cost:322410, margin:215931, margin_pct:40.1,asp:29908},
   {label:"07-12",units:4, revenue:105462,  cost:59980,  margin:45482,  margin_pct:43.1,asp:26366},
   {label:"07-19",units:8, revenue:315332,  cost:187460, margin:127872, margin_pct:40.6,asp:39416},
+  {label:"07-26",units:9, revenue:378922,  cost:224955, margin:153967, margin_pct:40.6,asp:42102},
+  {label:"08-03",units:13,revenue:773883,  cost:462435, margin:311448, margin_pct:40.2,asp:59529},
 ];
 
 const skuAgg=[
-  {sku:"KAW26-MJK01",  desc:"Tres en Uno Chaqueta",      units:7,  revenue:853939, cost:489965,margin:363974,margin_pct:42.6,asp:121991,last_inv:112,sell_through:5.9},
-  {sku:"KAW26-MPK02",  desc:"Parka Nieve Negra Masc.",    units:6,  revenue:783943, cost:419970,margin:363973,margin_pct:46.4,asp:130657,last_inv:78, sell_through:7.1},
-  {sku:"KAW26-MFL01N", desc:"Top Long Sleeve Masc.",     units:33, revenue:714205, cost:412335,margin:301870,margin_pct:42.3,asp:21643, last_inv:41, sell_through:44.6},
-  {sku:"KAW26-MPK01N", desc:"Repreve Thin Parka Masc.",  units:10, revenue:622911, cost:349950,margin:272961,margin_pct:43.8,asp:62291, last_inv:70, sell_through:12.5},
-  {sku:"KAW26-WFL01N", desc:"Top Long Sleeve Fem.",      units:24, revenue:543280, cost:299880,margin:243400,margin_pct:44.8,asp:22637, last_inv:51, sell_through:32.0},
-  {sku:"KAW26-WPK01V", desc:"Repreve Thin Parka Verde",  units:8,  revenue:531924, cost:279960,margin:251964,margin_pct:47.4,asp:66490, last_inv:46, sell_through:14.8},
+  {sku:"KAW26-MJK01",  desc:"Tres en Uno Chaqueta",      units:9,  revenue:1105921,cost:629955,margin:475966,margin_pct:43.0,asp:122880,last_inv:110,sell_through:7.6},
+  {sku:"KAW26-MPK02",  desc:"Parka Nieve Negra Masc.",    units:8,  revenue:1021926,cost:559960,margin:461966,margin_pct:45.2,asp:127741,last_inv:76, sell_through:9.5},
+  {sku:"KAW26-MFL01N", desc:"Top Long Sleeve Masc.",     units:39, revenue:839155, cost:487785,margin:351370,margin_pct:41.9,asp:21517, last_inv:36, sell_through:52.0},
+  {sku:"KAW26-MPK01N", desc:"Repreve Thin Parka Masc.",  units:13, revenue:783882, cost:454935,margin:328947,margin_pct:42.0,asp:60299, last_inv:67, sell_through:16.2},
+  {sku:"KAW26-WPK01V", desc:"Repreve Thin Parka Verde",  units:10, revenue:643905, cost:349950,margin:293955,margin_pct:45.7,asp:64390, last_inv:44, sell_through:18.5},
+  {sku:"KAW26-WFL01N", desc:"Top Long Sleeve Fem.",      units:25, revenue:565771, cost:312375,margin:253396,margin_pct:44.8,asp:22631, last_inv:50, sell_through:33.3},
+  {sku:"KAW26-MKF02T", desc:"Full Zipper Fleece Color",  units:11, revenue:427898, cost:247445,margin:180453,margin_pct:42.2,asp:38900, last_inv:43, sell_through:20.4},
   {sku:"KAW26-WPK01N", desc:"Repreve Thin Parka Fem.",   units:7,  revenue:419938, cost:244965,margin:174973,margin_pct:41.7,asp:59991, last_inv:83, sell_through:7.8},
-  {sku:"KAW26-MKF02T", desc:"Full Zipper Fleece Color",  units:10, revenue:387407, cost:224950,margin:162457,margin_pct:41.9,asp:38741, last_inv:44, sell_through:18.5},
-  {sku:"KAW26-WKF03N", desc:"Boucle Full Zipper",        units:8,  revenue:359934, cost:199960,margin:159974,margin_pct:44.4,asp:44992, last_inv:87, sell_through:8.4},
-  {sku:"KAW26-MKF02N", desc:"Full Zipper Fleece Negro",  units:7,  revenue:286843, cost:157465,margin:129378,margin_pct:45.1,asp:40978, last_inv:95, sell_through:6.9},
-  {sku:"KAW26-MPK01T", desc:"Repreve Thin Parka Tierra", units:3,  revenue:167976, cost:104985,margin:62991, margin_pct:37.5,asp:55992, last_inv:57, sell_through:5.0},
-  {sku:"KAW26-WKF01M", desc:"Microfleece Half Zip Fem.", units:4,  revenue:129463, cost:69980, margin:59483, margin_pct:45.9,asp:32366, last_inv:74, sell_through:5.1},
+  {sku:"KAW26-WKF03N", desc:"Boucle Full Zipper",        units:9,  revenue:404926, cost:224955,margin:179971,margin_pct:44.4,asp:44992, last_inv:86, sell_through:9.5},
+  {sku:"KAW26-MKF02N", desc:"Full Zipper Fleece Negro",  units:9,  revenue:363326, cost:202455,margin:160871,margin_pct:44.3,asp:40370, last_inv:93, sell_through:8.8},
+  {sku:"KAW26-MPK01T", desc:"Repreve Thin Parka Tierra", units:4,  revenue:216966, cost:139980,margin:76986, margin_pct:35.5,asp:54242, last_inv:56, sell_through:6.7},
+  {sku:"KAW26-WKF01M", desc:"Microfleece Half Zip Fem.", units:5,  revenue:160954, cost:87475, margin:73479, margin_pct:45.7,asp:32191, last_inv:73, sell_through:6.4},
   {sku:"KAW26-WPK03",  desc:"Parka Nieve Negra Fem.",    units:1,  revenue:125991, cost:69995, margin:55996, margin_pct:44.4,asp:125991,last_inv:53, sell_through:1.9},
   {sku:"KAW26-MKF01N", desc:"Microfleece Half Zip Masc.",units:3,  revenue:101471, cost:52485, margin:48986, margin_pct:48.3,asp:33824, last_inv:105,sell_through:2.8},
 ];
 
 const heatData=[
-  {sku:"KAW26-MFL01N", w:[0,0,0,0,0,0,0,0,1,1,0,1,8,7,2,7,3,3]},
-  {sku:"KAW26-MJK01",  w:[0,0,0,0,0,0,1,2,0,0,1,0,2,0,0,1,0,0]},
-  {sku:"KAW26-MKF01N", w:[0,0,0,0,0,1,0,0,0,0,1,0,0,0,1,0,0,0]},
-  {sku:"KAW26-MKF02N", w:[0,0,0,0,0,0,0,0,3,0,1,0,2,0,0,0,0,1]},
-  {sku:"KAW26-MKF02T", w:[0,0,0,0,0,0,0,0,1,1,2,0,3,0,1,0,0,2]},
-  {sku:"KAW26-MPK01N", w:[0,0,0,0,0,0,1,0,1,0,1,1,2,0,3,0,1,0]},
-  {sku:"KAW26-MPK01T", w:[0,0,0,0,0,0,0,0,0,0,0,2,1,0,0,0,0,0]},
-  {sku:"KAW26-MPK02",  w:[0,0,0,0,0,0,0,0,1,0,0,2,0,2,0,0,0,1]},
-  {sku:"KAW26-WFL01N", w:[0,0,0,0,0,0,0,0,3,2,0,0,2,3,5,7,1,1]},
-  {sku:"KAW26-WKF01M", w:[0,0,0,0,0,0,2,0,0,0,1,0,0,0,0,1,0,0]},
-  {sku:"KAW26-WKF03N", w:[0,0,0,0,0,0,2,1,0,0,1,0,2,2,0,1,-1,0]},
-  {sku:"KAW26-WPK01N", w:[0,0,0,1,0,1,0,0,0,0,1,1,0,1,1,1,0,0]},
-  {sku:"KAW26-WPK01V", w:[0,0,0,0,0,1,1,2,1,1,0,0,1,0,1,0,0,0]},
-  {sku:"KAW26-WPK03",  w:[0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0]},
+  {sku:"KAW26-MFL01N", w:[0,0,0,0,0,0,0,0,1,1,0,1,8,7,2,7,3,3,5,1]},
+  {sku:"KAW26-MJK01",  w:[0,0,0,0,0,0,1,2,0,0,1,0,2,0,0,1,0,0,1,1]},
+  {sku:"KAW26-MKF01N", w:[0,0,0,0,0,1,0,0,0,0,1,0,0,0,1,0,0,0,0,0]},
+  {sku:"KAW26-MKF02N", w:[0,0,0,0,0,0,0,0,3,0,1,0,2,0,0,0,0,1,1,1]},
+  {sku:"KAW26-MKF02T", w:[0,0,0,0,0,0,0,0,1,1,2,0,3,0,1,0,0,2,0,1]},
+  {sku:"KAW26-MPK01N", w:[0,0,0,0,0,0,1,0,1,0,1,1,2,0,3,0,1,0,2,1]},
+  {sku:"KAW26-MPK01T", w:[0,0,0,0,0,0,0,0,0,0,0,2,1,0,0,0,0,0,0,1]},
+  {sku:"KAW26-MPK02",  w:[0,0,0,0,0,0,0,0,1,0,0,2,0,2,0,0,0,1,1,2]},
+  {sku:"KAW26-WFL01N", w:[0,0,0,0,0,0,0,0,3,2,0,0,2,3,5,7,1,1,0,1]},
+  {sku:"KAW26-WKF01M", w:[0,0,0,0,0,0,2,0,0,0,1,0,0,0,0,1,0,0,0,1]},
+  {sku:"KAW26-WKF03N", w:[0,0,0,0,0,0,2,1,0,0,1,0,2,2,0,1,-1,0,0,1]},
+  {sku:"KAW26-WPK01N", w:[0,0,0,1,0,1,0,0,0,0,1,1,0,1,1,1,0,0,0,0]},
+  {sku:"KAW26-WPK01V", w:[0,0,0,0,0,1,1,2,1,1,0,0,1,0,1,0,0,0,0,2]},
+  {sku:"KAW26-WPK03",  w:[0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0]},
 ];
 
 const weeklyDetail={
-  "KAW26-MFL01N":[{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:19992,c:12495},{u:1,r:24990,c:12495},{u:0,r:0,c:0},{u:1,r:17493,c:12495},{u:8,r:172431,c:99960},{u:7,r:146936,c:87465},{u:2,r:44982,c:24990},{u:7,r:157437,c:87465},{u:3,r:59972,c:37485},{u:3,r:69972,c:37485}],
-  "KAW26-MJK01": [{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:125991,c:69995},{u:2,r:279980,c:139990},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:111992,c:69995},{u:0,r:0,c:0},{u:2,r:237983,c:139990},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:97993,c:69995},{u:0,r:0,c:0},{u:0,r:0,c:0}],
-  "KAW26-MKF01N":[{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:34990,c:17495},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:34990,c:17495},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:31491,c:17495},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0}],
-  "KAW26-MKF02N":[{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:3,r:127472,c:67485},{u:0,r:0,c:0},{u:1,r:44990,c:22495},{u:0,r:0,c:0},{u:2,r:80982,c:44990},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:33399,c:22495}],
-  "KAW26-MKF02T":[{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:35992,c:22495},{u:1,r:44990,c:22495},{u:2,r:89980,c:44990},{u:0,r:0,c:0},{u:3,r:116974,c:67485},{u:0,r:0,c:0},{u:1,r:35992,c:22495},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:2,r:63479,c:44990}],
-  "KAW26-MPK01N":[{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:69990,c:34995},{u:0,r:0,c:0},{u:1,r:62991,c:34995},{u:0,r:0,c:0},{u:1,r:69990,c:34995},{u:1,r:55992,c:34995},{u:2,r:125982,c:69990},{u:0,r:0,c:0},{u:3,r:174975,c:104985},{u:0,r:0,c:0},{u:1,r:62991,c:34995},{u:0,r:0,c:0}],
-  "KAW26-MPK01T":[{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:2,r:111984,c:69990},{u:1,r:62991,c:34995},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0}],
-  "KAW26-MPK02": [{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:125990,c:69995},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:2,r:279980,c:139990},{u:0,r:0,c:0},{u:2,r:251982,c:139990},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:125991,c:69995}],
-  "KAW26-WFL01N":[{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:3,r:72471,c:37485},{u:2,r:49980,c:24990},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:2,r:44982,c:24990},{u:3,r:67473,c:37485},{u:5,r:105954,c:62475},{u:7,r:157438,c:87465},{u:1,r:22491,c:12495},{u:1,r:22491,c:12495}],
-  "KAW26-WKF01M":[{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:2,r:69980,c:34990},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:27992,c:17495},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:31491,c:17495},{u:0,r:0,c:0},{u:0,r:0,c:0}],
-  "KAW26-WKF03N":[{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:2,r:94982,c:49990},{u:1,r:44992,c:24995},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:44992,c:24995},{u:0,r:0,c:0},{u:2,r:84984,c:49990},{u:2,r:84984,c:49990},{u:0,r:0,c:0},{u:1,r:44992,c:24995},{u:-1,r:-39992,c:-24995},{u:0,r:0,c:0}],
-  "KAW26-WPK01N":[{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:69990,c:34995},{u:0,r:0,c:0},{u:1,r:62991,c:34995},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:55992,c:34995},{u:1,r:62991,c:34995},{u:0,r:0,c:0},{u:1,r:55992,c:34995},{u:1,r:62991,c:34995},{u:1,r:48990,c:34995},{u:0,r:0,c:0},{u:0,r:0,c:0}],
-  "KAW26-WPK01V":[{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:62991,c:34995},{u:1,r:76989,c:34995},{u:2,r:118983,c:69990},{u:1,r:69990,c:34995},{u:1,r:69990,c:34995},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:69990,c:34995},{u:0,r:0,c:0},{u:1,r:62991,c:34995},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0}],
-  "KAW26-WPK03": [{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:125991,c:69995},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0}],
+  "KAW26-MFL01N":[{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:19992,c:12495},{u:1,r:24990,c:12495},{u:0,r:0,c:0},{u:1,r:17493,c:12495},{u:8,r:172431,c:99960},{u:7,r:146936,c:87465},{u:2,r:44982,c:24990},{u:7,r:157437,c:87465},{u:3,r:59972,c:37485},{u:3,r:69972,c:37485},{u:5,r:104955,c:62475},{u:1,r:19992,c:12495}],
+  "KAW26-MJK01": [{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:125991,c:69995},{u:2,r:279980,c:139990},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:111992,c:69995},{u:0,r:0,c:0},{u:2,r:237983,c:139990},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:97993,c:69995},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:125991,c:69995},{u:1,r:125991,c:69995}],
+  "KAW26-MKF01N":[{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:34990,c:17495},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:34990,c:17495},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:31491,c:17495},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0}],
+  "KAW26-MKF02N":[{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:3,r:127472,c:67485},{u:0,r:0,c:0},{u:1,r:44990,c:22495},{u:0,r:0,c:0},{u:2,r:80982,c:44990},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:33399,c:22495},{u:1,r:35992,c:22495},{u:1,r:40491,c:22495}],
+  "KAW26-MKF02T":[{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:35992,c:22495},{u:1,r:44990,c:22495},{u:2,r:89980,c:44990},{u:0,r:0,c:0},{u:3,r:116974,c:67485},{u:0,r:0,c:0},{u:1,r:35992,c:22495},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:2,r:63479,c:44990},{u:0,r:0,c:0},{u:1,r:40491,c:22495}],
+  "KAW26-MPK01N":[{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:69990,c:34995},{u:0,r:0,c:0},{u:1,r:62991,c:34995},{u:0,r:0,c:0},{u:1,r:69990,c:34995},{u:1,r:55992,c:34995},{u:2,r:125982,c:69990},{u:0,r:0,c:0},{u:3,r:174975,c:104985},{u:0,r:0,c:0},{u:1,r:62991,c:34995},{u:0,r:0,c:0},{u:2,r:111981,c:69990},{u:1,r:48990,c:34995}],
+  "KAW26-MPK01T":[{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:2,r:111984,c:69990},{u:1,r:62991,c:34995},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:41991,c:34995}],
+  "KAW26-MPK02": [{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:125990,c:69995},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:2,r:279980,c:139990},{u:0,r:0,c:0},{u:2,r:251982,c:139990},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:125991,c:69995},{u:1,r:125991,c:69995},{u:2,r:237983,c:139990}],
+  "KAW26-WFL01N":[{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:3,r:72471,c:37485},{u:2,r:49980,c:24990},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:2,r:44982,c:24990},{u:3,r:67473,c:37485},{u:5,r:105954,c:62475},{u:7,r:157438,c:87465},{u:1,r:22491,c:12495},{u:1,r:22491,c:12495},{u:0,r:0,c:0},{u:1,r:22491,c:12495}],
+  "KAW26-WKF01M":[{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:2,r:69980,c:34990},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:27992,c:17495},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:31491,c:17495},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:31491,c:17495}],
+  "KAW26-WKF03N":[{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:2,r:94982,c:49990},{u:1,r:44992,c:24995},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:44992,c:24995},{u:0,r:0,c:0},{u:2,r:84984,c:49990},{u:2,r:84984,c:49990},{u:0,r:0,c:0},{u:1,r:44992,c:24995},{u:-1,r:-39992,c:-24995},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:44992,c:24995}],
+  "KAW26-WPK01N":[{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:69990,c:34995},{u:0,r:0,c:0},{u:1,r:62991,c:34995},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:55992,c:34995},{u:1,r:62991,c:34995},{u:0,r:0,c:0},{u:1,r:55992,c:34995},{u:1,r:62991,c:34995},{u:1,r:48990,c:34995},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0}],
+  "KAW26-WPK01V":[{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:62991,c:34995},{u:1,r:76989,c:34995},{u:2,r:118983,c:69990},{u:1,r:69990,c:34995},{u:1,r:69990,c:34995},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:69990,c:34995},{u:0,r:0,c:0},{u:1,r:62991,c:34995},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:2,r:111972,c:69990}],
+  "KAW26-WPK03": [{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:1,r:125991,c:69995},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0},{u:0,r:0,c:0}],
 };
 
 const sizeData=[
-  {sku:"KAW26-MFL01N",S:0,M:11,L:13,XL:9},{sku:"KAW26-MJK01", S:1,M:4,L:2,XL:0},
-  {sku:"KAW26-MKF01N",S:0,M:1,L:2,XL:0}, {sku:"KAW26-MKF02N",S:1,M:2,L:3,XL:1},
-  {sku:"KAW26-MKF02T",S:1,M:4,L:5,XL:0}, {sku:"KAW26-MPK01N",S:0,M:5,L:2,XL:3},
-  {sku:"KAW26-MPK01T",S:0,M:1,L:1,XL:1}, {sku:"KAW26-MPK02", S:1,M:2,L:3,XL:0},
-  {sku:"KAW26-WFL01N",S:0,M:12,L:11,XL:1},{sku:"KAW26-WKF01M",S:0,M:0,L:4,XL:0},
-  {sku:"KAW26-WKF03N",S:0,M:2,L:3,XL:3}, {sku:"KAW26-WPK01N",S:0,M:2,L:3,XL:2},
-  {sku:"KAW26-WPK01V",S:1,M:2,L:2,XL:3}, {sku:"KAW26-WPK03", S:0,M:0,L:1,XL:0},
+  {sku:"KAW26-MFL01N",S:0,M:15,L:13,XL:11},{sku:"KAW26-MJK01", S:2,M:5,L:2,XL:0},
+  {sku:"KAW26-MKF01N",S:0,M:1,L:2,XL:0},  {sku:"KAW26-MKF02N",S:2,M:3,L:3,XL:1},
+  {sku:"KAW26-MKF02T",S:1,M:5,L:5,XL:0},  {sku:"KAW26-MPK01N",S:0,M:6,L:3,XL:4},
+  {sku:"KAW26-MPK01T",S:1,M:1,L:1,XL:1},  {sku:"KAW26-MPK02", S:3,M:2,L:3,XL:0},
+  {sku:"KAW26-WFL01N",S:0,M:12,L:11,XL:2},{sku:"KAW26-WKF01M",S:0,M:0,L:5,XL:0},
+  {sku:"KAW26-WKF03N",S:0,M:2,L:4,XL:3},  {sku:"KAW26-WPK01N",S:0,M:2,L:3,XL:2},
+  {sku:"KAW26-WPK01V",S:2,M:2,L:3,XL:3},  {sku:"KAW26-WPK03", S:0,M:0,L:1,XL:0},
 ];
 
 const invData=[
-  {sku:"KAW26-MJK01",  inv:112},{sku:"KAW26-MKF01N", inv:105},{sku:"KAW26-MKF02N", inv:95},
-  {sku:"KAW26-WKF03N", inv:87}, {sku:"KAW26-WPK01N", inv:83}, {sku:"KAW26-MPK02",  inv:78},
-  {sku:"KAW26-WKF01M", inv:74}, {sku:"KAW26-MPK01N", inv:70}, {sku:"KAW26-MPK01T", inv:57},
-  {sku:"KAW26-WPK03",  inv:53}, {sku:"KAW26-WFL01N", inv:51}, {sku:"KAW26-WPK01V", inv:46},
-  {sku:"KAW26-MKF02T", inv:44}, {sku:"KAW26-MFL01N", inv:41},
+  {sku:"KAW26-MJK01",  inv:110},{sku:"KAW26-MKF01N", inv:105},{sku:"KAW26-MKF02N", inv:93},
+  {sku:"KAW26-WKF03N", inv:86}, {sku:"KAW26-WPK01N", inv:83}, {sku:"KAW26-MPK02",  inv:76},
+  {sku:"KAW26-WKF01M", inv:73}, {sku:"KAW26-MPK01N", inv:67}, {sku:"KAW26-MPK01T", inv:56},
+  {sku:"KAW26-WPK03",  inv:53}, {sku:"KAW26-WFL01N", inv:50}, {sku:"KAW26-WPK01V", inv:44},
+  {sku:"KAW26-MKF02T", inv:43}, {sku:"KAW26-MFL01N", inv:36},
 ];
 const storeData=[
-  {id:"41",inv:226},{id:"22",inv:202},{id:"109",inv:202},
-  {id:"25",inv:127},{id:"16",inv:122},{id:"107",inv:117},
+  {id:"41",inv:220},{id:"22",inv:201},{id:"109",inv:199},
+  {id:"25",inv:127},{id:"16",inv:115},{id:"107",inv:113},
 ];
-const totalInv=996;
+const totalInv=975;
 
 const fmtK=v=>v===0?'—':v<0?'-$'+(Math.abs(v)/1000).toFixed(0)+'K':'$'+(v/1000000>=1?(v/1000000).toFixed(2)+'M':(v/1000).toFixed(0)+'K');
 const fmtF=v=>v===0?'—':'$'+v.toLocaleString('es-CL');
 const hc=v=>v<0?'heat-neg':v===0?'heat-zero':v===1?'heat-1':v===2?'heat-2':v<=3?'heat-3':v<=5?'heat-4':v<=8?'heat-5':'heat-6';
-
+const isNew=i=>i===NEW_WK1||i===NEW_WK2;
 const maxRev=Math.max(...weeklyData.map(d=>d.revenue));
 const maxU=Math.max(...weeklyData.map(d=>d.units));
 
@@ -423,22 +426,22 @@ const cBase={responsive:true,maintainAspectRatio:false,
           y:{grid:{color:'#1e2d48'},ticks:{color:'#8892a4',font:{family:'DM Mono',size:10}}}}};
 
 const mkBgRev=wi=>weeklyData.map((d,i)=>{
-  if(wi==='ALL') return i===NEW_WK?'#1bd97b50':i===HOT_WK?'#f5c51850':i===ADJ_WK?'#e0303040':d.revenue===maxRev?'#00c2a850':'#00c2a818';
+  if(wi==='ALL') return isNew(i)?'#1bd97b50':i===HOT_WK?'#f5c51850':i===ADJ_WK?'#e0303040':d.revenue===maxRev?'#00c2a850':'#00c2a818';
   return i===wi?'#00c2a870':'#00c2a810';
 });
 const mkBgU=wi=>weeklyData.map((d,i)=>{
-  if(wi==='ALL') return i===NEW_WK?'#1bd97b60':i===HOT_WK?'#f5631870':i===ADJ_WK?'#e0303040':d.units===maxU?'#f5631860':'#00c2a818';
+  if(wi==='ALL') return isNew(i)?'#1bd97b60':i===HOT_WK?'#f5631870':i===ADJ_WK?'#e0303040':d.units===maxU?'#f5631860':'#00c2a818';
   return i===wi?'#f5631870':'#00c2a810';
 });
-const mkBd=()=>weeklyData.map((_,i)=>i===NEW_WK?'#1bd97b':i===HOT_WK?'#f5c518':i===ADJ_WK?'#e03030':'#00c2a8');
+const mkBd=()=>weeklyData.map((_,i)=>isNew(i)?'#1bd97b':i===HOT_WK?'#f5c518':i===ADJ_WK?'#e03030':'#00c2a8');
 
 const chartRev=new Chart(document.getElementById('chartWeekly'),{
   type:'bar',
   data:{labels:weeklyData.map(d=>d.label),datasets:[
     {label:'Revenue',data:weeklyData.map(d=>d.revenue),backgroundColor:mkBgRev('ALL'),borderColor:mkBd(),borderWidth:1.5,borderRadius:3},
-    {label:'Margen', data:weeklyData.map(d=>d.margin), type:'line',tension:0.4,fill:false,borderColor:'#1bd97b',borderWidth:2,
-     pointRadius:weeklyData.map((_,i)=>i===NEW_WK||i===HOT_WK?4:2),
-     pointBackgroundColor:weeklyData.map((_,i)=>i===NEW_WK?'#1bd97b':i===HOT_WK?'#f5c518':'#1bd97b80'),
+    {label:'Margen', data:weeklyData.map(d=>d.margin),type:'line',tension:0.4,fill:false,borderColor:'#1bd97b',borderWidth:2,
+     pointRadius:weeklyData.map((_,i)=>isNew(i)||i===HOT_WK?4:2),
+     pointBackgroundColor:weeklyData.map((_,i)=>isNew(i)?'#1bd97b':i===HOT_WK?'#f5c518':'#1bd97b80'),
      backgroundColor:'transparent'}
   ]},
   options:{...cBase,scales:{...cBase.scales,y:{...cBase.scales.y,ticks:{...cBase.scales.y.ticks,callback:v=>'$'+(v/1000).toFixed(0)+'K'}}}}
@@ -453,11 +456,10 @@ const chartU=new Chart(document.getElementById('chartUnits'),{
 });
 
 function renderSkuTable(wi){
-  const body=document.getElementById('skuBody');
-  const title=document.getElementById('skuTableTitle');
+  const body=document.getElementById('skuBody'),title=document.getElementById('skuTableTitle');
   let rows;
   if(wi==='ALL'){
-    title.textContent='Acumulado · 14 SKUs · 18 semanas · ST sobre inv. real';
+    title.textContent='Acumulado · 14 SKUs · 20 semanas · ST sobre inv. real';
     rows=skuAgg.map(r=>({...r}));
   } else {
     title.textContent=`Semana ${LABELS[wi]} · ${PERIODS[wi].replace(' al ',' → ')}${wi===ADJ_WK?' ↩ ajuste':''}`;
@@ -471,8 +473,8 @@ function renderSkuTable(wi){
   }
   body.innerHTML=rows.map(r=>{
     const sv=r.sell_through;
-    const sc=sv>=40?'st-ok':sv>=15?'st-mid':'st-low';
-    const scol=sv>=40?'#1bd97b':sv>=15?'#f5c518':'#e03030';
+    const sc=sv>=50?'st-hot':sv>=30?'st-ok':sv>=15?'st-mid':'st-low';
+    const scol=sv>=50?'#00e8d0':sv>=30?'#1bd97b':sv>=15?'#f5c518':'#e03030';
     const mc=r.margin_pct>=46?'ok':r.margin_pct>=40?'warn':'red';
     return`<tr class="${r.units===0?'zero-row':r.units<0?'neg-row':''}">
       <td>${r.sku}</td><td title="${r.desc}">${r.desc}</td>
@@ -486,20 +488,20 @@ function renderSkuTable(wi){
 }
 
 function renderHeatmap(wi){
-  document.getElementById('heatSubtitle').textContent=wi==='ALL'?'● 07-19 nueva semana':`Semana ${LABELS[wi]} resaltada${wi===ADJ_WK?' ↩':''}`;
-  for(let i=0;i<18;i++){
+  document.getElementById('heatSubtitle').textContent=wi==='ALL'?'● 07-26 y 08-03 nuevas':`Semana ${LABELS[wi]} resaltada${wi===ADJ_WK?' ↩':''}`;
+  for(let i=0;i<20;i++){
     const th=document.getElementById('h'+i);
     if(wi!=='ALL'&&i===wi){th.style.color='var(--teal)';th.style.borderBottom='2px solid var(--teal)';}
     else if(i===HOT_WK&&wi==='ALL'){th.style.color='var(--yellow)';th.style.borderBottom='';}
-    else if(i===NEW_WK&&wi==='ALL'){th.style.color='var(--green)';th.style.borderBottom='';}
+    else if(isNew(i)&&wi==='ALL'){th.style.color='var(--green)';th.style.borderBottom='';}
     else if(i===ADJ_WK&&wi==='ALL'){th.style.color='var(--red)';th.style.borderBottom='';}
     else{th.style.color='';th.style.borderBottom='';}
   }
   document.getElementById('heatBody').innerHTML=heatData.map(r=>{
     const total=r.w.reduce((a,b)=>a+(b>0?b:0),0);
     const cells=r.w.map((v,i)=>{
-      const isN=i===NEW_WK,isA=i===ADJ_WK;
-      let cls=wi!=='ALL'&&i===wi?(isA?'wk-adj-hi':isN?'wk-new-hi':'wk-hi'):(isA?'wk-adj':isN?'wk-new':'wk');
+      const n=isNew(i),a=i===ADJ_WK;
+      const cls=wi!=='ALL'&&i===wi?(a?'wk-adj-hi':n?'wk-new-hi':'wk-hi'):(a?'wk-adj':n?'wk-new':'wk');
       return`<td class="${cls} ${hc(v)}">${v===0?'·':v}</td>`;
     }).join('');
     return`<tr><td style="font-family:'DM Mono',monospace;font-size:9px">${r.sku}</td>${cells}<td style="text-align:right;font-family:'DM Mono',monospace;font-size:9px;color:var(--teal);font-weight:600">${total||'—'}</td></tr>`;
@@ -525,24 +527,19 @@ function renderSizeTable(wi){
 function updateKpis(wi){
   const banner=document.getElementById('weekBanner');
   if(wi==='ALL'){
-    const tu=skuAgg.reduce((a,r)=>a+r.units,0);
-    const tr=skuAgg.reduce((a,r)=>a+r.revenue,0);
-    const tc=skuAgg.reduce((a,r)=>a+r.cost,0);
-    const tm=tr-tc;
-    const stPct=(tu/(tu+totalInv)*100).toFixed(1);
-    const asp=tu>0?Math.round(tr/tu):0;
+    const tu=skuAgg.reduce((a,r)=>a+r.units,0),tr=skuAgg.reduce((a,r)=>a+r.revenue,0),tc=skuAgg.reduce((a,r)=>a+r.cost,0),tm=tr-tc;
+    const stPct=(tu/(tu+totalInv)*100).toFixed(1),asp=tu>0?Math.round(tr/tu):0;
     document.getElementById('kpiUnits').textContent=tu;
-    document.getElementById('kpiUnitsSub').textContent='18 semanas · +8 u sem. 07-19';
+    document.getElementById('kpiUnitsSub').textContent='20 sem · +22 u (07-26 + 08-03)';
     document.getElementById('kpiRevenue').textContent=fmtK(tr);
     document.getElementById('kpiMargin').textContent=fmtK(tm);
     document.getElementById('kpiMarginSub').textContent=tr>0?(tm/tr*100).toFixed(1)+'% sobre revenue':'—';
     document.getElementById('kpiAsp').textContent=asp>0?'$'+(asp/1000).toFixed(0)+'K':'—';
     document.getElementById('kpiST').textContent=stPct+'%';
-    document.getElementById('kpiInv').textContent='996 u';
+    document.getElementById('kpiInv').textContent='975 u';
     banner.classList.remove('visible');
   } else {
-    const wd=weeklyData[wi];
-    const skusA=Object.values(weeklyDetail).filter(w=>w[wi].u!==0).length;
+    const wd=weeklyData[wi],skusA=Object.values(weeklyDetail).filter(w=>w[wi].u!==0).length;
     document.getElementById('kpiUnits').textContent=wd.units||'0';
     document.getElementById('kpiUnitsSub').textContent=PERIODS[wi].split(' al ')[0];
     document.getElementById('kpiRevenue').textContent=fmtK(wd.revenue);
@@ -550,17 +547,17 @@ function updateKpis(wi){
     document.getElementById('kpiMarginSub').textContent=wd.revenue!==0?wd.margin_pct+'% sobre revenue':'—';
     document.getElementById('kpiAsp').textContent=wd.asp>0?'$'+(wd.asp/1000).toFixed(0)+'K':'—';
     document.getElementById('kpiST').textContent='—';
-    document.getElementById('kpiInv').textContent='996 u (total)';
-    const lbl=LABELS[wi]+(wi===HOT_WK?' ★':wi===ADJ_WK?' ↩':wi===NEW_WK?' ●':'');
+    document.getElementById('kpiInv').textContent='975 u (total)';
+    const lbl=LABELS[wi]+(wi===HOT_WK?' ★':wi===ADJ_WK?' ↩':isNew(wi)?' ●':'');
     document.getElementById('bPeriod').textContent=lbl;
-    document.getElementById('bPeriod').className='wb-val '+(wi===HOT_WK?'c-yellow':wi===ADJ_WK?'c-red':wi===NEW_WK?'c-green':'c-teal');
+    document.getElementById('bPeriod').className='wb-val '+(wi===HOT_WK?'c-yellow':wi===ADJ_WK?'c-red':isNew(wi)?'c-green':'c-teal');
     document.getElementById('bUnits').textContent=wd.units||'0';
     document.getElementById('bRevenue').textContent=fmtK(wd.revenue);
     document.getElementById('bMargin').textContent=fmtK(wd.margin);
     document.getElementById('bMarginPct').textContent=wd.revenue!==0?wd.margin_pct+'%':'—';
     document.getElementById('bAsp').textContent=wd.asp>0?'$'+wd.asp.toLocaleString('es-CL'):'—';
     document.getElementById('bSkus').textContent=skusA+' con movimiento';
-    banner.className='week-banner visible '+(wi===HOT_WK?'gold':wi===ADJ_WK?'red':wi===NEW_WK?'green':'blue');
+    banner.className='week-banner visible '+(wi===HOT_WK?'gold':wi===ADJ_WK?'red':isNew(wi)?'green':'blue');
   }
 }
 
@@ -573,7 +570,7 @@ function updateAlert(wi){
   const el=document.getElementById('alertText'),ab=document.getElementById('alertBanner'),ai=document.getElementById('alertIcon');
   if(wi==='ALL'){
     ab.className='alert-banner good';ai.textContent='📊';
-    el.innerHTML='<strong>18 semanas · peak de temporada en marcha.</strong> Sem. 07-19: 8 u y $315K — ritmo estable. MFL01N alcanza 33 u vendidas (ST 44.6%), solo 41 u restantes en tiendas — riesgo de quiebre inminente en L/M. MKF02T sube a 10 u (ST 18.5%). Acumulado: <strong>133 u · $5.24M</strong>.';
+    el.innerHTML='<strong>20 semanas · fin del peak de invierno.</strong> Sem. 08-03 es la 2ª mejor semana post-récord: 13 u y $774K. MFL01N supera 50% ST (39 u vendidas, 36 u en tiendas — riesgo de quiebre). MPK02 y MJK01 se reactivan fuerte en agosto. Acumulado: <strong>153 u · $6.59M · Mg 43.1%</strong>. Inventario real: <strong>975 u</strong>.';
   } else if(wi===HOT_WK){
     ab.className='alert-banner hot';ai.textContent='🔥';
     const act=Object.entries(weeklyDetail).filter(([k,v])=>v[wi].u>0).map(([k])=>k.replace('KAW26-',''));
@@ -581,22 +578,20 @@ function updateAlert(wi){
     el.innerHTML=`<strong>★ Semana ${LABELS[wi]} — RÉCORD:</strong> 23 u · $997K · Mg 43.1% · ${act.length} SKUs activos: <em>${act.join(', ')}</em>. Líder: <strong>${top[0].replace('KAW26-','')}</strong>.`;
   } else if(wi===ADJ_WK){
     ab.className='alert-banner red';ai.textContent='↩';
-    el.innerHTML=`<strong>Semana ${LABELS[wi]} — Contiene ajuste negativo.</strong> WKF03N registra -1 u (devolución/corrección). Las 4 unidades de venta positiva son de MFL01N (3 u) y MPK01N (1 u). El neto real visible es 4 u pero incluye -1 u de ajuste en el heatmap.`;
-  } else if(wi===NEW_WK){
+    el.innerHTML=`<strong>Semana ${LABELS[wi]} — Ajuste negativo:</strong> WKF03N registra -1 u (corrección/devolución). Las 4 u de venta positiva corresponden a MFL01N (3 u) y MPK01N (1 u).`;
+  } else if(isNew(wi)){
     ab.className='alert-banner good';ai.textContent='🌱';
     const act=Object.entries(weeklyDetail).filter(([k,v])=>v[wi].u>0).map(([k])=>k.replace('KAW26-',''));
     const top=Object.entries(weeklyDetail).filter(([k,v])=>v[wi].u>0).sort((a,b)=>b[1][wi].r-a[1][wi].r)[0];
-    el.innerHTML=`<strong>● Semana ${LABELS[wi]} — nueva:</strong> 8 u · $315K · Mg 40.6% · SKUs activos: <em>${act.join(', ')}</em>. Líder: <strong>${top[0].replace('KAW26-','')}</strong> ($${top[1][wi].r.toLocaleString('es-CL')}). Ritmo post-peak sostenido.`;
+    el.innerHTML=`<strong>● Semana ${LABELS[wi]} — nueva:</strong> ${weeklyData[wi].units} u · ${fmtK(weeklyData[wi].revenue)} · Mg ${weeklyData[wi].margin_pct}% · SKUs activos: <em>${act.join(', ')}</em>. Líder: <strong>${top[0].replace('KAW26-','')}</strong> ($${top[1][wi].r.toLocaleString('es-CL')}).`;
   } else {
     const wd=weeklyData[wi];
-    if(wd.units===0){
-      ab.className='alert-banner warn';ai.textContent='—';
-      el.innerHTML=`<strong>Semana ${LABELS[wi]}:</strong> Sin ventas registradas.`;
-    } else {
+    if(wd.units===0){ab.className='alert-banner warn';ai.textContent='—';el.innerHTML=`<strong>Semana ${LABELS[wi]}:</strong> Sin ventas.`;}
+    else {
       ab.className='alert-banner warn';ai.textContent='ℹ️';
       const act=Object.entries(weeklyDetail).filter(([k,v])=>v[wi].u>0).map(([k])=>k.replace('KAW26-',''));
       const top=Object.entries(weeklyDetail).filter(([k,v])=>v[wi].u>0).sort((a,b)=>b[1][wi].r-a[1][wi].r)[0];
-      el.innerHTML=`<strong>Semana ${LABELS[wi]}:</strong> ${wd.units} u · ${fmtK(wd.revenue)} · Mg ${wd.margin_pct}% · SKUs activos: <em>${act.join(', ')}</em>${top?`. Líder: <strong>${top[0].replace('KAW26-','')}</strong>`:''}.`;
+      el.innerHTML=`<strong>Semana ${LABELS[wi]}:</strong> ${wd.units} u · ${fmtK(wd.revenue)} · Mg ${wd.margin_pct}% · SKUs: <em>${act.join(', ')}</em>${top?`. Líder: <strong>${top[0].replace('KAW26-','')}</strong>`:''}. `;
     }
   }
 }
@@ -615,7 +610,6 @@ document.getElementById('invRank').innerHTML=invData.map(r=>
 document.getElementById('storeRank').innerHTML=storeData.map(s=>
   `<div class="store-row"><span class="store-name">Tienda ${s.id}</span><div class="store-bg"><div class="store-bar" style="width:${(s.inv/storeData[0].inv*100).toFixed(1)}%"></div></div><span class="store-v">${s.inv} u</span><span class="store-pct">${(s.inv/totalInv*100).toFixed(1)}%</span></div>`
 ).join('');
-
 filterWeek('ALL');
 </script>
 </body>
